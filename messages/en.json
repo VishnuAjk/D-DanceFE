@@ -1,0 +1,40 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "back": "Back",
+    "submit": "Submit",
+    "logout": "Logout",
+    "error": "Something went wrong. Please try again.",
+    "noData": "No data found."
+  },
+  "auth": {
+    "title": "Welcome to Dance Institute",
+    "phoneLabel": "Mobile Number",
+    "phonePlaceholder": "Enter 10-digit mobile number",
+    "sendOtp": "Send OTP",
+    "otpLabel": "Enter OTP",
+    "verifyOtp": "Verify and Login",
+    "resendOtp": "Resend OTP",
+    "resendIn": "Resend in {seconds}s"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "branches": "Branches",
+    "courses": "Courses",
+    "batches": "Batches",
+    "enrollments": "Enrollments",
+    "users": "Users",
+    "fees": "Fees",
+    "reports": "Reports",
+    "children": "My Children",
+    "attendance": "Attendance",
+    "assessments": "Assessments",
+    "videos": "Video Library",
+    "payments": "Payments"
+  }
+}

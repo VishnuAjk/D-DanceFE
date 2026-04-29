@@ -1,0 +1,77 @@
+import type { ApiResponse } from '@danceapp/shared';
+import apiClient from '@/lib/api-client';
+import type { Batch, Branch, Course, EnrollmentRosterItem } from '@/types/admin';
+
+function unwrapData<T>(response: { data: ApiResponse<T> }) {
+  if (response.data.data === null || response.data.data === undefined) {
+    throw new Error('API returned an empty payload');
+  }
+
+  return response.data.data;
+}
+
+export function fetchBranches() {
+  return apiClient.get<ApiResponse<Branch[]>>('/api/admin/branches').then(unwrapData);
+}
+
+export function createBranch(payload: Partial<Branch>) {
+  return apiClient.post<ApiResponse<Branch>>('/api/admin/branches', payload).then(unwrapData);
+}
+
+export function updateBranch(id: string, payload: Partial<Branch>) {
+  return apiClient.put<ApiResponse<Branch>>(`/api/admin/branches/${id}`, payload).then(unwrapData);
+}
+
+export function fetchCourses() {
+  return apiClient.get<ApiResponse<Course[]>>('/api/admin/courses').then(unwrapData);
+}
+
+export function createCourse(payload: Partial<Course>) {
+  return apiClient.post<ApiResponse<Course>>('/api/admin/courses', payload).then(unwrapData);
+}
+
+export function updateCourse(id: string, payload: Partial<Course>) {
+  return apiClient.put<ApiResponse<Course>>(`/api/admin/courses/${id}`, payload).then(unwrapData);
+}
+
+export function createLevel(courseId: string, payload: { name: string; order: number }) {
+  return apiClient
+    .post<ApiResponse<unknown>>(`/api/admin/courses/${courseId}/levels`, payload)
+    .then(unwrapData);
+}
+
+export function updateLevel(levelId: string, payload: { name?: string; order?: number }) {
+  return apiClient.put<ApiResponse<unknown>>(`/api/admin/levels/${levelId}`, payload).then(unwrapData);
+}
+
+export function fetchBatches(filters?: { branchId?: string }) {
+  return apiClient
+    .get<ApiResponse<Batch[]>>('/api/admin/batches', { params: filters })
+    .then(unwrapData);
+}
+
+export function fetchBatch(batchId: string) {
+  return fetchBatches().then((batches) => {
+    const batch = batches.find((entry) => entry._id === batchId);
+
+    if (!batch) {
+      throw new Error('Batch not found');
+    }
+
+    return batch;
+  });
+}
+
+export function createBatch(payload: Record<string, unknown>) {
+  return apiClient.post<ApiResponse<Batch>>('/api/admin/batches', payload).then(unwrapData);
+}
+
+export function updateBatch(batchId: string, payload: Record<string, unknown>) {
+  return apiClient.put<ApiResponse<Batch>>(`/api/admin/batches/${batchId}`, payload).then(unwrapData);
+}
+
+export function fetchBatchRoster(batchId: string) {
+  return apiClient
+    .get<ApiResponse<EnrollmentRosterItem[]>>(`/api/admin/batches/${batchId}/roster`)
+    .then(unwrapData);
+}
