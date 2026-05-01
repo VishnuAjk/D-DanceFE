@@ -57,6 +57,18 @@ export default function ChildrenPage() {
           </article>
         )}
       </section>
+
+      <section className="admin-callout">
+        <p className="dashboard__eyebrow">After profile setup</p>
+        <div className="admin-callout__links">
+          <Link className="button button--primary" href="/parent/enrollments/new">
+            Create enrollment request
+          </Link>
+          <Link className="button button--ghost" href="/parent/enrollments">
+            View enrollment statuses
+          </Link>
+        </div>
+      </section>
     </main>
   );
 }

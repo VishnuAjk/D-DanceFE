@@ -23,7 +23,9 @@ export function readReferenceId(value: string | NamedRef | undefined) {
   return typeof value === 'string' ? value : value._id;
 }
 
-export function formatSchedule(batch: Batch) {
+export function formatSchedule(
+  batch: Pick<Batch, 'schedule'> | { schedule: { days: string[]; startTime: string; endTime: string } }
+) {
   return `${batch.schedule.days.join(', ')} • ${batch.schedule.startTime} - ${batch.schedule.endTime}`;
 }
 

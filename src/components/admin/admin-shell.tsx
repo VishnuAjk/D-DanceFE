@@ -9,7 +9,8 @@ const navigation = [
   { href: '/admin', label: 'Dashboard' },
   { href: '/admin/branches', label: 'Branches' },
   { href: '/admin/courses', label: 'Courses' },
-  { href: '/admin/batches', label: 'Batches' }
+  { href: '/admin/batches', label: 'Batches' },
+  { href: '/admin/enrollments', label: 'Enrollments' }
 ];
 
 export function AdminShell({ children }: { children: React.ReactNode }) {

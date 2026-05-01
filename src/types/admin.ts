@@ -61,3 +61,12 @@ export interface EnrollmentRosterItem {
   status: string;
   childId: string | Child;
 }
+
+export interface AdminEnrollment {
+  _id: string;
+  status: 'PENDING' | 'APPROVED' | 'ACTIVE' | 'SUSPENDED' | 'CANCELLED';
+  childId: string | Child;
+  batchId: string | Batch;
+  branchId: string | Branch | NamedRef;
+  createdAt?: string;
+}

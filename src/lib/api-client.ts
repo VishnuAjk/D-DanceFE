@@ -35,7 +35,18 @@ client.interceptors.request.use((config) => {
 client.interceptors.response.use(
   (response) => response,
   async (error) => {
-    const originalRequest = error.config as { _retry?: boolean; headers: Record<string, string> };
+    const originalRequest = error.config as {
+      _retry?: boolean;
+      headers: Record<string, string>;
+      url?: string;
+    };
+
+    const requestUrl = originalRequest?.url ?? '';
+    const isRefreshRequest = requestUrl.includes('/api/auth/refresh');
+
+    if (error.response?.status === 401 && isRefreshRequest) {
+      return Promise.reject(error);
+    }
 
     if (error.response?.status === 401 && !originalRequest?._retry) {
       originalRequest._retry = true;

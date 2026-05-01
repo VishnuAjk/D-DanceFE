@@ -1,6 +1,12 @@
 import type { ApiResponse } from '@danceapp/shared';
 import apiClient from '@/lib/api-client';
-import type { Batch, Branch, Course, EnrollmentRosterItem } from '@/types/admin';
+import type {
+  AdminEnrollment,
+  Batch,
+  Branch,
+  Course,
+  EnrollmentRosterItem
+} from '@/types/admin';
 
 function unwrapData<T>(response: { data: ApiResponse<T> }) {
   if (response.data.data === null || response.data.data === undefined) {
@@ -73,5 +79,33 @@ export function updateBatch(batchId: string, payload: Record<string, unknown>) {
 export function fetchBatchRoster(batchId: string) {
   return apiClient
     .get<ApiResponse<EnrollmentRosterItem[]>>(`/api/admin/batches/${batchId}/roster`)
+    .then(unwrapData);
+}
+
+export function fetchAdminEnrollments(filters?: {
+  status?: string;
+  branchId?: string;
+  batchId?: string;
+}) {
+  return apiClient
+    .get<ApiResponse<AdminEnrollment[]>>('/api/admin/enrollments', { params: filters })
+    .then(unwrapData);
+}
+
+export function approveEnrollment(enrollmentId: string) {
+  return apiClient
+    .put<ApiResponse<AdminEnrollment>>(`/api/admin/enrollments/${enrollmentId}/approve`)
+    .then(unwrapData);
+}
+
+export function rejectEnrollment(enrollmentId: string) {
+  return apiClient
+    .put<ApiResponse<AdminEnrollment>>(`/api/admin/enrollments/${enrollmentId}/reject`)
+    .then(unwrapData);
+}
+
+export function suspendEnrollment(enrollmentId: string) {
+  return apiClient
+    .put<ApiResponse<AdminEnrollment>>(`/api/admin/enrollments/${enrollmentId}/suspend`)
     .then(unwrapData);
 }

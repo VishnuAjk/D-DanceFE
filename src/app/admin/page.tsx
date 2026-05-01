@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useAdminEnrollments } from '@/hooks/use-admin-enrollments';
 import { useBatches } from '@/hooks/use-batches';
 import { useBranches } from '@/hooks/use-branches';
 import { formatCurrency } from '@/lib/admin-format';
@@ -8,6 +9,7 @@ import { formatCurrency } from '@/lib/admin-format';
 export default function AdminHomePage() {
   const branchesQuery = useBranches();
   const batchesQuery = useBatches();
+  const enrollmentsQuery = useAdminEnrollments({ status: 'PENDING' });
   const branches = branchesQuery.data ?? [];
   const batches = batchesQuery.data ?? [];
   const activeBatches = batches.filter((batch) => batch.isActive);
@@ -54,8 +56,9 @@ export default function AdminHomePage() {
         <article className="metric-card">
           <h2>Pending enrollments</h2>
           <p>
-            Enrollment approval API is not in place yet, so this card will become live in the
-            parent/admin sprint.
+            {enrollmentsQuery.isLoading
+              ? 'Loading enrollment queue...'
+              : `${enrollmentsQuery.data?.length ?? 0} requests are waiting for admin review`}
           </p>
         </article>
       </section>
@@ -71,6 +74,9 @@ export default function AdminHomePage() {
           </Link>
           <Link className="button button--ghost" href="/admin/batches">
             View batches
+          </Link>
+          <Link className="button button--ghost" href="/admin/enrollments">
+            Review enrollments
           </Link>
         </div>
       </section>

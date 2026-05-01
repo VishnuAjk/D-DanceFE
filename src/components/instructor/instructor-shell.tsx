@@ -6,30 +6,27 @@ import { ProtectedShell } from '@/components/protected-shell';
 import { useAuth } from '@/providers/auth-provider';
 
 const navigation = [
-  { href: '/parent/dashboard', label: 'Dashboard' },
-  { href: '/parent/children', label: 'My Children' },
-  { href: '/parent/enrollments', label: 'Enrollments' },
-  { href: '/parent/attendance', label: 'Attendance' },
-  { href: '/parent/assessments', label: 'Assessments' }
+  { href: '/instructor/dashboard', label: 'Dashboard' },
+  { href: '/instructor/batches', label: 'My Batches' }
 ];
 
-export function ParentShell({ children }: { children: React.ReactNode }) {
+export function InstructorShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { user, logout } = useAuth();
 
   return (
-    <ProtectedShell roles={['parent']}>
-      <div className="family-shell">
-        <aside className="family-sidebar">
+    <ProtectedShell roles={['instructor', 'super_admin']}>
+      <div className="coach-shell">
+        <aside className="coach-sidebar">
           <div>
-            <p className="dashboard__eyebrow">Parent</p>
-            <h1 className="family-sidebar__title">Family hub for classes and enrollments.</h1>
+            <p className="dashboard__eyebrow">Instructor</p>
+            <h1 className="family-sidebar__title">Teaching flow for live class operations.</h1>
             <p className="family-sidebar__text">
-              Signed in as <strong>{user?.name ?? 'Parent'}</strong>.
+              Signed in as <strong>{user?.name ?? 'Instructor'}</strong>.
             </p>
           </div>
 
-          <nav className="admin-nav" aria-label="Parent navigation">
+          <nav className="admin-nav" aria-label="Instructor navigation">
             {navigation.map((item) => (
               <Link
                 key={item.href}
@@ -46,7 +43,7 @@ export function ParentShell({ children }: { children: React.ReactNode }) {
           </button>
         </aside>
 
-        <div className="family-content">{children}</div>
+        <div className="coach-content">{children}</div>
       </div>
     </ProtectedShell>
   );

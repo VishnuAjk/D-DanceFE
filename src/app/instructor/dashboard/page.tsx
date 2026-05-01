@@ -2,6 +2,6 @@
 
 import { InstructorDashboard } from '@/components/instructor/instructor-dashboard';
 
-export default function InstructorHomePage() {
+export default function InstructorDashboardPage() {
   return <InstructorDashboard />;
 }
