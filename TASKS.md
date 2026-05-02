@@ -15,3 +15,4 @@
 | INST-01-FE | INST-01 | Instructor Batches + Roster UI | DONE | Instructor dashboard and roster pages implemented on top of instructor batch endpoints |
 | INST-02-FE | INST-02 | Attendance Mark + View UI | DONE | Instructor attendance marking page + parent monthly attendance calendar implemented |
 | INST-03-FE | INST-03 | Progress Assessments UI | DONE | Instructor batch assessment capture + share UI implemented; parent assessment timeline page added |
+| PAY-01-FE | PAY-01 | Fee Ledger UI | DONE | Admin fee ledger/generate pages + parent fee cards page implemented with role navigation updates |

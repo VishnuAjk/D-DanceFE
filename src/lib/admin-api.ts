@@ -2,6 +2,7 @@ import type { ApiResponse } from '@danceapp/shared';
 import apiClient from '@/lib/api-client';
 import type {
   AdminEnrollment,
+  AdminFeeLedger,
   Batch,
   Branch,
   Course,
@@ -107,5 +108,37 @@ export function rejectEnrollment(enrollmentId: string) {
 export function suspendEnrollment(enrollmentId: string) {
   return apiClient
     .put<ApiResponse<AdminEnrollment>>(`/api/admin/enrollments/${enrollmentId}/suspend`)
+    .then(unwrapData);
+}
+
+export function generateFeeLedger(payload: { month: string; branchId?: string; batchId?: string }) {
+  return apiClient
+    .post<ApiResponse<{ month: string; enrollmentCount: number; insertedCount: number; matchedCount: number }>>(
+      '/api/admin/fees/generate',
+      payload
+    )
+    .then(unwrapData);
+}
+
+export function fetchFeeLedger(filters?: {
+  branchId?: string;
+  month?: string;
+  status?: string;
+  childId?: string;
+}) {
+  return apiClient
+    .get<ApiResponse<AdminFeeLedger[]>>('/api/admin/fees/ledger', { params: filters })
+    .then(unwrapData);
+}
+
+export function waiveFeeLedger(ledgerId: string) {
+  return apiClient
+    .put<ApiResponse<AdminFeeLedger>>(`/api/admin/fees/ledger/${ledgerId}/waive`)
+    .then(unwrapData);
+}
+
+export function discountFeeLedger(ledgerId: string, payload: { discount: number; notes?: string }) {
+  return apiClient
+    .put<ApiResponse<AdminFeeLedger>>(`/api/admin/fees/ledger/${ledgerId}/discount`, payload)
     .then(unwrapData);
 }

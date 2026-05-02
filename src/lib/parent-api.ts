@@ -7,7 +7,8 @@ import type {
   ParentDashboardSummary,
   ParentEnrollment,
   ParentAttendanceRecord,
-  ParentAssessmentRecord
+  ParentAssessmentRecord,
+  ParentFeeLedger
 } from '@/types/parent';
 
 function unwrapData<T>(response: { data: ApiResponse<T> }) {
@@ -89,4 +90,8 @@ export function fetchChildAssessments(filters: { childId: string }) {
   return apiClient
     .get<ApiResponse<ParentAssessmentRecord[]>>('/api/student/assessments', { params: filters })
     .then(unwrapData);
+}
+
+export function fetchParentFees(filters?: { childId?: string; month?: string }) {
+  return apiClient.get<ApiResponse<ParentFeeLedger[]>>('/api/student/fees', { params: filters }).then(unwrapData);
 }

@@ -78,6 +78,9 @@ export default function AdminHomePage() {
           <Link className="button button--ghost" href="/admin/enrollments">
             Review enrollments
           </Link>
+          <Link className="button button--ghost" href="/admin/fees">
+            Review fees
+          </Link>
         </div>
       </section>
     </main>

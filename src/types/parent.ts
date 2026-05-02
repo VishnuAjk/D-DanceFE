@@ -84,3 +84,23 @@ export interface ParentAssessmentRecord {
   sharedWithParent?: boolean;
   sharedAt?: string;
 }
+
+export interface ParentFeeLedger {
+  _id: string;
+  month: string;
+  amount: number;
+  discount: number;
+  finalAmount: number;
+  status: 'DUE' | 'PAID' | 'OVERDUE' | 'WAIVED';
+  paidAt?: string;
+  dueDate: string;
+  childId: string | ParentChild;
+  branchId: string | ParentBranchOption;
+  enrollmentId:
+    | string
+    | {
+        _id: string;
+        status: string;
+        batchId: string | ParentBatchOption;
+      };
+}

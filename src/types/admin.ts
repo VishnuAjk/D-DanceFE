@@ -70,3 +70,23 @@ export interface AdminEnrollment {
   branchId: string | Branch | NamedRef;
   createdAt?: string;
 }
+
+export interface FeeLinkedEnrollment {
+  _id: string;
+  status: string;
+  batchId: string | Batch;
+}
+
+export interface AdminFeeLedger {
+  _id: string;
+  month: string;
+  amount: number;
+  discount: number;
+  finalAmount: number;
+  status: 'DUE' | 'PAID' | 'OVERDUE' | 'WAIVED';
+  paidAt?: string;
+  dueDate: string;
+  childId: string | Child;
+  branchId: string | Branch | NamedRef;
+  enrollmentId: string | FeeLinkedEnrollment;
+}

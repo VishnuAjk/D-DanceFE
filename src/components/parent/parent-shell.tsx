@@ -10,7 +10,8 @@ const navigation = [
   { href: '/parent/children', label: 'My Children' },
   { href: '/parent/enrollments', label: 'Enrollments' },
   { href: '/parent/attendance', label: 'Attendance' },
-  { href: '/parent/assessments', label: 'Assessments' }
+  { href: '/parent/assessments', label: 'Assessments' },
+  { href: '/parent/fees', label: 'Fees' }
 ];
 
 export function ParentShell({ children }: { children: React.ReactNode }) {
