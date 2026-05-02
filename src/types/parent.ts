@@ -104,3 +104,10 @@ export interface ParentFeeLedger {
         batchId: string | ParentBatchOption;
       };
 }
+
+export interface ParentPaymentInitiation {
+  orderId: string;
+  amount: number;
+  currency: string;
+  keyId: string | null;
+}

@@ -16,3 +16,4 @@
 | INST-02-FE | INST-02 | Attendance Mark + View UI | DONE | Instructor attendance marking page + parent monthly attendance calendar implemented |
 | INST-03-FE | INST-03 | Progress Assessments UI | DONE | Instructor batch assessment capture + share UI implemented; parent assessment timeline page added |
 | PAY-01-FE | PAY-01 | Fee Ledger UI | DONE | Admin fee ledger/generate pages + parent fee cards page implemented with role navigation updates |
+| PAY-02-FE | PAY-02 | Razorpay Payment Initiation UI | DONE | Parent checkout page added with multi-ledger selection; parent fee list now links into live payment initiation |

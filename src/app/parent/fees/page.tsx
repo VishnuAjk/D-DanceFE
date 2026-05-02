@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useState } from 'react';
 import { useParentFees } from '@/hooks/use-parent-fees';
 import { useChildren } from '@/hooks/use-children';
@@ -39,7 +40,7 @@ export default function ParentFeesPage() {
           <p className="dashboard__eyebrow">Fees</p>
           <h1 className="admin-page__title">Review dues for each child profile.</h1>
           <p className="dashboard__text">
-            Payment checkout arrives in the next ticket. This page already shows the ledger and what is due now.
+            Select any due month and continue into checkout. Multi-month payment is handled on the next screen.
           </p>
         </div>
       </section>
@@ -96,9 +97,20 @@ export default function ParentFeesPage() {
                 </p>
 
                 <div className="admin-panel__actions">
-                  <button className="button button--primary" type="button" disabled={entry.status !== 'DUE' && entry.status !== 'OVERDUE'}>
-                    Pay Now (PAY-02)
-                  </button>
+                  {entry.status === 'DUE' || entry.status === 'OVERDUE' ? (
+                    <Link
+                      className="button button--primary"
+                      href={`/parent/fees/pay?month=${encodeURIComponent(month)}&childId=${encodeURIComponent(
+                        childId
+                      )}&ledgerIds=${encodeURIComponent(entry._id)}`}
+                    >
+                      Pay now
+                    </Link>
+                  ) : (
+                    <button className="button button--primary" type="button" disabled>
+                      Pay now
+                    </button>
+                  )}
                 </div>
               </article>
             );
@@ -112,4 +124,3 @@ export default function ParentFeesPage() {
     </main>
   );
 }
-
