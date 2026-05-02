@@ -8,7 +8,8 @@ import type {
   ParentEnrollment,
   ParentAttendanceRecord,
   ParentAssessmentRecord,
-  ParentFeeLedger
+  ParentFeeLedger,
+  ParentPaymentInitiation
 } from '@/types/parent';
 
 function unwrapData<T>(response: { data: ApiResponse<T> }) {
@@ -94,4 +95,10 @@ export function fetchChildAssessments(filters: { childId: string }) {
 
 export function fetchParentFees(filters?: { childId?: string; month?: string }) {
   return apiClient.get<ApiResponse<ParentFeeLedger[]>>('/api/student/fees', { params: filters }).then(unwrapData);
+}
+
+export function initiateParentFeePayment(payload: { ledgerIds: string[] }) {
+  return apiClient
+    .post<ApiResponse<ParentPaymentInitiation>>('/api/student/fees/pay', payload)
+    .then(unwrapData);
 }

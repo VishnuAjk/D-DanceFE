@@ -604,6 +604,7 @@ select {
   border: 1px solid var(--border);
   background: rgba(255, 255, 255, 0.52);
   color: var(--text);
+  cursor: pointer;
 }
 
 .selection-card.is-selected {
@@ -626,6 +627,18 @@ select {
 .status-badge--pending {
   background: rgba(239, 207, 176, 0.55);
   color: #71401f;
+}
+
+.status-badge--due,
+.status-badge--overdue {
+  background: rgba(181, 83, 47, 0.12);
+  color: #8e3d20;
+}
+
+.status-badge--paid,
+.status-badge--waived {
+  background: rgba(96, 168, 113, 0.18);
+  color: #23522d;
 }
 
 .status-badge--approved,
