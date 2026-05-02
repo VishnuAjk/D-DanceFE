@@ -10,7 +10,8 @@ const navigation = [
   { href: '/admin/branches', label: 'Branches' },
   { href: '/admin/courses', label: 'Courses' },
   { href: '/admin/batches', label: 'Batches' },
-  { href: '/admin/enrollments', label: 'Enrollments' }
+  { href: '/admin/enrollments', label: 'Enrollments' },
+  { href: '/admin/fees', label: 'Fees' }
 ];
 
 export function AdminShell({ children }: { children: React.ReactNode }) {
