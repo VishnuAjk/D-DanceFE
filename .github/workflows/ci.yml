@@ -13,6 +13,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          path: app
+
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository_owner }}/D-DanceShared
+          path: D-DanceShared
+          token: ${{ secrets.SHARED_REPO_TOKEN || github.token }}
 
       - uses: pnpm/action-setup@v4
         with:
@@ -22,20 +30,26 @@ jobs:
         with:
           node-version: 20
           cache: pnpm
+          cache-dependency-path: app/pnpm-lock.yaml
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+        working-directory: app
 
       - name: Typecheck
         run: pnpm typecheck
+        working-directory: app
 
       - name: Lint
         run: pnpm lint
+        working-directory: app
 
       - name: Test
         run: pnpm test
+        working-directory: app
 
       - name: Build
         run: pnpm build
+        working-directory: app
         env:
           NEXT_PUBLIC_API_URL: http://localhost:4000
