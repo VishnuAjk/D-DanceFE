@@ -16,3 +16,4 @@
 | INST-03-FE | Progress Assessments UI | DONE | Instructor assessments page added under `/instructor/batches/[id]/assessments`; parent assessments page added under `/parent/assessments` |
 | PAY-01-FE | Fee Ledger UI | DONE | Admin fees list and generate pages added; parent fees page added; admin and parent navigation updated |
 | PAY-02-FE | Razorpay Payment Initiation UI | DONE | Parent payment page added under `/parent/fees/pay`; parent fee ledger cards now preselect entries into checkout; FE lint/typecheck passed |
+| REPORT-01-FE | Video Library UI | DONE | `/parent/videos` and `/admin/videos` added with course/level/tag filtering, admin create/edit/delete flow, and shell navigation updates; FE lint/typecheck passed |
