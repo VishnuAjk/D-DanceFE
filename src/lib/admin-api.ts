@@ -3,6 +3,7 @@ import apiClient from '@/lib/api-client';
 import type {
   AdminEnrollment,
   AdminFeeLedger,
+  AdminVideo,
   Batch,
   Branch,
   Course,
@@ -141,4 +142,20 @@ export function discountFeeLedger(ledgerId: string, payload: { discount: number;
   return apiClient
     .put<ApiResponse<AdminFeeLedger>>(`/api/admin/fees/ledger/${ledgerId}/discount`, payload)
     .then(unwrapData);
+}
+
+export function fetchAdminVideos() {
+  return apiClient.get<ApiResponse<AdminVideo[]>>('/api/admin/videos').then(unwrapData);
+}
+
+export function createAdminVideo(payload: Record<string, unknown>) {
+  return apiClient.post<ApiResponse<AdminVideo>>('/api/admin/videos', payload).then(unwrapData);
+}
+
+export function updateAdminVideo(videoId: string, payload: Record<string, unknown>) {
+  return apiClient.put<ApiResponse<AdminVideo>>(`/api/admin/videos/${videoId}`, payload).then(unwrapData);
+}
+
+export function deleteAdminVideo(videoId: string) {
+  return apiClient.delete<ApiResponse<{ deleted: boolean }>>(`/api/admin/videos/${videoId}`).then(unwrapData);
 }

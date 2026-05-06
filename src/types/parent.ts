@@ -111,3 +111,17 @@ export interface ParentPaymentInitiation {
   currency: string;
   keyId: string | null;
 }
+
+export interface ParentVideo {
+  _id: string;
+  title: string;
+  description?: string;
+  videoUrl: string;
+  thumbnailUrl?: string;
+  tags: string[];
+  courseId?: string | { _id: string; name: string };
+  levelId?: string | { _id: string; name: string; order?: number };
+  branchIds: Array<string | ParentBranchOption>;
+  isPublished: boolean;
+  publishedAt?: string;
+}

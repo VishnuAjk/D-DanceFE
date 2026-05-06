@@ -11,7 +11,8 @@ const navigation = [
   { href: '/parent/enrollments', label: 'Enrollments' },
   { href: '/parent/attendance', label: 'Attendance' },
   { href: '/parent/assessments', label: 'Assessments' },
-  { href: '/parent/fees', label: 'Fees' }
+  { href: '/parent/fees', label: 'Fees' },
+  { href: '/parent/videos', label: 'Videos' }
 ];
 
 export function ParentShell({ children }: { children: React.ReactNode }) {

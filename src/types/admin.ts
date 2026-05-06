@@ -90,3 +90,17 @@ export interface AdminFeeLedger {
   branchId: string | Branch | NamedRef;
   enrollmentId: string | FeeLinkedEnrollment;
 }
+
+export interface AdminVideo {
+  _id: string;
+  title: string;
+  description?: string;
+  videoUrl: string;
+  thumbnailUrl?: string;
+  tags: string[];
+  courseId?: string | NamedRef;
+  levelId?: string | Level | NamedRef;
+  branchIds: Array<string | Branch | NamedRef>;
+  isPublished: boolean;
+  publishedAt?: string;
+}
