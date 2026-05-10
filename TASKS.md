@@ -18,3 +18,4 @@
 | PAY-01-FE | PAY-01 | Fee Ledger UI | DONE | Admin fee ledger/generate pages + parent fee cards page implemented with role navigation updates |
 | PAY-02-FE | PAY-02 | Razorpay Payment Initiation UI | DONE | Parent checkout page added with multi-ledger selection; parent fee list now links into live payment initiation |
 | REPORT-01-FE | REPORT-01 | Video Library UI | DONE | Parent browse page and admin video-library management page added with navigation updates and filterable video cards |
+| REPORT-02-FE | REPORT-02 | Admin Reports UI | DONE | Admin reports page added with revenue bars, attendance table, enrollment status summary, scoped filters, and nav entry |
