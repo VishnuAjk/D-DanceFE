@@ -673,6 +673,117 @@ select {
   margin-bottom: 1rem;
 }
 
+.report-grid,
+.report-panel {
+  display: grid;
+  gap: 1rem;
+}
+
+.bar-chart {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.bar-chart__row {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  gap: 0.5rem 0.75rem;
+  align-items: center;
+}
+
+.bar-chart__label,
+.bar-chart__value {
+  color: var(--muted);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.bar-chart__track {
+  height: 0.85rem;
+  border-radius: 999px;
+  background: rgba(33, 23, 15, 0.08);
+  overflow: hidden;
+}
+
+.bar-chart__bar {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #b5532f, #487c6a);
+}
+
+.bar-chart__value {
+  grid-column: 2;
+}
+
+.donut-list,
+.report-summary {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.donut-list__row,
+.report-summary span {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.58);
+}
+
+.report-summary span {
+  display: block;
+  font-weight: 700;
+}
+
+.status-dot {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 999px;
+  background: rgba(33, 23, 15, 0.18);
+}
+
+.status-dot--pending {
+  background: #c58c44;
+}
+
+.status-dot--approved,
+.status-dot--active {
+  background: #3d8d57;
+}
+
+.status-dot--suspended,
+.status-dot--cancelled {
+  background: #b5532f;
+}
+
+.report-table {
+  display: grid;
+  gap: 0.5rem;
+  overflow-x: auto;
+}
+
+.report-table__row {
+  min-width: 42rem;
+  display: grid;
+  grid-template-columns: 8rem minmax(9rem, 1fr) 7rem minmax(9rem, 1fr);
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.58);
+}
+
+.report-table__row--head {
+  color: var(--muted);
+  font-weight: 800;
+  background: rgba(239, 207, 176, 0.28);
+}
+
 @media (min-width: 640px) {
   .landing,
   .auth-screen,
@@ -730,6 +841,14 @@ select {
 
   .admin-form-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .report-grid {
+    grid-template-columns: minmax(0, 1.4fr) minmax(16rem, 0.6fr);
+  }
+
+  .report-summary {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .level-list__item,

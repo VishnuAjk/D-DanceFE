@@ -104,3 +104,43 @@ export interface AdminVideo {
   isPublished: boolean;
   publishedAt?: string;
 }
+
+export interface RevenueReport {
+  fromMonth: string;
+  toMonth: string;
+  total: number;
+  rows: Array<{
+    month: string;
+    total: number;
+    count: number;
+  }>;
+}
+
+export interface AttendanceReport {
+  batch: {
+    _id: string;
+    name: string;
+  };
+  month: string;
+  summary: {
+    PRESENT: number;
+    ABSENT: number;
+    LATE: number;
+    total: number;
+  };
+  rows: Array<{
+    _id: string;
+    date: string;
+    status: 'PRESENT' | 'ABSENT' | 'LATE';
+    childName: string;
+    notes?: string;
+  }>;
+}
+
+export interface EnrollmentStatsReport {
+  total: number;
+  rows: Array<{
+    status: 'PENDING' | 'APPROVED' | 'ACTIVE' | 'SUSPENDED' | 'CANCELLED';
+    count: number;
+  }>;
+}

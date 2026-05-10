@@ -4,10 +4,13 @@ import type {
   AdminEnrollment,
   AdminFeeLedger,
   AdminVideo,
+  AttendanceReport,
   Batch,
   Branch,
   Course,
-  EnrollmentRosterItem
+  EnrollmentRosterItem,
+  EnrollmentStatsReport,
+  RevenueReport
 } from '@/types/admin';
 
 function unwrapData<T>(response: { data: ApiResponse<T> }) {
@@ -158,4 +161,22 @@ export function updateAdminVideo(videoId: string, payload: Record<string, unknow
 
 export function deleteAdminVideo(videoId: string) {
   return apiClient.delete<ApiResponse<{ deleted: boolean }>>(`/api/admin/videos/${videoId}`).then(unwrapData);
+}
+
+export function fetchRevenueReport(filters: { branchId?: string; fromMonth: string; toMonth: string }) {
+  return apiClient
+    .get<ApiResponse<RevenueReport>>('/api/admin/reports/revenue', { params: filters })
+    .then(unwrapData);
+}
+
+export function fetchAttendanceReport(filters: { batchId: string; month: string }) {
+  return apiClient
+    .get<ApiResponse<AttendanceReport>>('/api/admin/reports/attendance', { params: filters })
+    .then(unwrapData);
+}
+
+export function fetchEnrollmentStatsReport(filters?: { branchId?: string }) {
+  return apiClient
+    .get<ApiResponse<EnrollmentStatsReport>>('/api/admin/reports/enrollment-stats', { params: filters })
+    .then(unwrapData);
 }
