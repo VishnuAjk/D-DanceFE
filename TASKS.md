@@ -19,3 +19,5 @@
 | PAY-02-FE | PAY-02 | Razorpay Payment Initiation UI | DONE | Parent checkout page added with multi-ledger selection; parent fee list now links into live payment initiation |
 | REPORT-01-FE | REPORT-01 | Video Library UI | DONE | Parent browse page and admin video-library management page added with navigation updates and filterable video cards |
 | REPORT-02-FE | REPORT-02 | Admin Reports UI | DONE | Admin reports page added with revenue bars, attendance table, enrollment status summary, scoped filters, and nav entry |
+| REL-01-FE | REL-01 | Deployment Setup | IN_PROGRESS | Local env/runbook setup complete; Vercel project, production environment variables, and custom domain setup require deployment account access |
+| REL-02-FE | REL-02 | E2E Tests | IN_PROGRESS | Playwright UI specs added for OTP login, parent enrollment, admin approval, and instructor attendance; browser execution requires host Chromium dependencies |
