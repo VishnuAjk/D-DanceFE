@@ -19,10 +19,9 @@ export default function AdminHomePage() {
     <main className="admin-page">
       <section className="dashboard__hero">
         <p className="dashboard__eyebrow">Admin Dashboard</p>
-        <h1 className="dashboard__title">Operational overview for branches, batches, and delivery.</h1>
+        <h1 className="dashboard__title">Overview for branches, batches, enrollments, and fees.</h1>
         <p className="dashboard__text">
-          The first admin workflow is now live end to end. Use the navigation to manage your
-          catalog and batch operations.
+          Review the studio at a glance and jump into the areas that need your attention.
         </p>
       </section>
 

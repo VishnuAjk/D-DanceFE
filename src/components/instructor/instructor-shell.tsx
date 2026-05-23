@@ -20,7 +20,7 @@ export function InstructorShell({ children }: { children: React.ReactNode }) {
         <aside className="coach-sidebar">
           <div>
             <p className="dashboard__eyebrow">Instructor</p>
-            <h1 className="family-sidebar__title">Teaching flow for live class operations.</h1>
+            <h1 className="family-sidebar__title">Manage today&apos;s classes and student progress.</h1>
             <p className="family-sidebar__text">
               Signed in as <strong>{user?.name ?? 'Instructor'}</strong>.
             </p>

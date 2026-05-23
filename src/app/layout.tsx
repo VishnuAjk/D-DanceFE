@@ -3,8 +3,8 @@ import { Providers } from '@/providers';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Dance Institute',
-  description: 'Management platform for dance institutes'
+  title: 'Dance Studio',
+  description: 'Class, enrollment, fee, and progress management for dance studios'
 };
 
 export default function RootLayout({

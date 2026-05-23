@@ -13,12 +13,29 @@ export function ParentDashboard() {
     <main className="family-page">
       <section className="dashboard__hero">
         <p className="dashboard__eyebrow">Parent Dashboard</p>
-        <h1 className="dashboard__title">Your children, classes, fees, and enrollment momentum.</h1>
+        <h1 className="dashboard__title">Your children, classes, fees, and progress.</h1>
         <p className="dashboard__text">
-          This dashboard now pulls real parent-side summary data so you can see what needs action
-          before opening each workflow.
+          Add child profiles, request classes, and follow updates from the studio in one place.
         </p>
       </section>
+
+      {!summaryQuery.isLoading && (summary?.childrenCount ?? 0) === 0 ? (
+        <section className="admin-callout">
+          <p className="dashboard__eyebrow">Get started</p>
+          <h2 className="metric-card__title">Add your first child profile.</h2>
+          <p className="dashboard__text">
+            Once a child is added, you can choose a branch and batch to request enrollment.
+          </p>
+          <div className="admin-callout__links">
+            <Link className="button button--primary" href="/parent/children/add">
+              Add child
+            </Link>
+            <Link className="button button--ghost" href="/parent/enrollments/new">
+              Request enrollment
+            </Link>
+          </div>
+        </section>
+      ) : null}
 
       <section className="dashboard__grid">
         <article className="metric-card">
@@ -71,7 +88,7 @@ export function ParentDashboard() {
           <h2>Next action</h2>
           <p>
             {(summary?.childrenCount ?? 0) === 0
-              ? 'Add your first child profile.'
+              ? 'Start by adding your first child profile.'
               : 'Keep enrollments moving and monitor approvals from the status page.'}
           </p>
         </article>
