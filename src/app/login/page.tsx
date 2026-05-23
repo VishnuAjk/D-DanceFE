@@ -162,10 +162,10 @@ export default function LoginPage() {
     return (
       <main className="auth-screen">
         <section className="auth-card">
-          <p className="auth-card__eyebrow">Checking session</p>
-          <h1 className="auth-card__title">Preparing your sign-in.</h1>
+          <p className="auth-card__eyebrow">Welcome back</p>
+          <h1 className="auth-card__title">Opening your account.</h1>
           <p className="auth-card__text">
-            Looking for an existing authenticated session before showing the OTP flow.
+            Please wait while we check whether you are already signed in.
           </p>
         </section>
       </main>
@@ -175,11 +175,11 @@ export default function LoginPage() {
   return (
     <main className="auth-screen">
       <section className="auth-card">
-        <p className="auth-card__eyebrow">AUTH-04</p>
-        <h1 className="auth-card__title">Sign in with your mobile number.</h1>
+        <p className="auth-card__eyebrow">Secure OTP sign in</p>
+        <h1 className="auth-card__title">Use your mobile number to continue.</h1>
         <p className="auth-card__text">
-          Use the same phone number you use for your dance app account. This flow is designed
-          mobile-first and works cleanly on smaller screens.
+          New parents can create an account with their mobile number. Instructors and admins
+          should use the number assigned by the studio.
         </p>
         <div className="auth-stepper" aria-label="Login progress">
           <div className={`auth-stepper__item${step === 'phone' ? ' is-active' : ' is-complete'}`}>
@@ -272,8 +272,8 @@ export default function LoginPage() {
           )}
         </div>
         <p className="auth-card__helper">
-          Demo backend uses a mock OTP adapter. If you need a value for local testing, inspect the
-          backend console response flow or adapter configuration.
+          Parents can sign up here directly. Instructor and admin access is created by the studio
+          team before first sign-in.
         </p>
         <Link className="auth-card__link" href="/">
           Back to homepage

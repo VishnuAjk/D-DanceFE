@@ -80,7 +80,7 @@ export default function AdminFeesPage() {
           <p className="dashboard__eyebrow">Fees</p>
           <h1 className="admin-page__title">Review ledger status, discounts, and waivers.</h1>
           <p className="dashboard__text">
-            Fee operations are kept card-first so admins can scan dues and act cleanly on mobile.
+            Track monthly dues, apply approved discounts, and confirm fee status for each child.
           </p>
         </div>
         <div className="admin-panel__actions">
@@ -225,4 +225,3 @@ export default function AdminFeesPage() {
     </main>
   );
 }
-

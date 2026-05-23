@@ -106,8 +106,7 @@ export default function BatchesPage() {
           <p className="dashboard__eyebrow">Batches</p>
           <h1 className="admin-page__title">Plan schedules, fees, and capacity.</h1>
           <p className="dashboard__text">
-            Batch operations are shown in a mobile-first list so admins can scan and act without a
-            desktop-only table layout.
+            Create class groups with the right branch, course, timing, instructor, and monthly fee.
           </p>
         </div>
         <button className="button button--primary" onClick={openCreate} type="button">
@@ -177,7 +176,7 @@ export default function BatchesPage() {
       {editor ? (
         <EntityModal
           title={editor.mode === 'edit' ? 'Edit batch' : 'Create batch'}
-          description="Batch setup drives schedule visibility, roster operations, and fee expectations."
+          description="Batch details define class schedules, rosters, and fee expectations."
           onClose={() => setEditor(null)}
         >
           <form

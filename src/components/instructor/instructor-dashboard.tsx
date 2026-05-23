@@ -30,8 +30,7 @@ export function InstructorDashboard() {
         <p className="dashboard__eyebrow">Instructor Dashboard</p>
         <h1 className="dashboard__title">See today&apos;s teaching load and jump into rosters fast.</h1>
         <p className="dashboard__text">
-          This is the first instructor workflow slice and is designed for quick in-class access on
-          smaller screens.
+          Review assigned batches, open rosters, mark attendance, and record progress after class.
         </p>
       </section>
 

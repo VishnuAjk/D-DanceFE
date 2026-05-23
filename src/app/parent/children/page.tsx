@@ -51,8 +51,8 @@ export default function ChildrenPage() {
         ) : (
           <article className="admin-panel">
             <p className="dashboard__text">
-              No children have been added yet. Start with one child profile to unlock the next
-              parent workflows.
+              No children have been added yet. Start with one child profile to request classes and
+              follow studio updates.
             </p>
           </article>
         )}

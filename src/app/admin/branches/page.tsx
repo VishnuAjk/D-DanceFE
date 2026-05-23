@@ -105,7 +105,7 @@ export default function BranchesPage() {
             ))
           ) : (
             <article className="admin-panel">
-              <p className="dashboard__text">No branches exist yet. Create the first one to begin operations.</p>
+              <p className="dashboard__text">No branches exist yet. Create the first branch to start setting up classes.</p>
             </article>
           )}
         </section>
@@ -114,7 +114,7 @@ export default function BranchesPage() {
       {editor ? (
         <EntityModal
           title={editor.mode === 'edit' ? 'Edit branch' : 'Create branch'}
-          description="Keep branch information complete so later admin workflows have a reliable operating context."
+          description="Keep branch information complete so classes, rosters, and fees stay accurate."
           onClose={() => setEditor(null)}
         >
           <form

@@ -33,8 +33,8 @@ export function ProtectedShell({ children, roles }: ProtectedShellProps) {
       <main className="status-screen">
         <section className="status-card">
           <p className="status-card__eyebrow">Loading</p>
-          <h1 className="status-card__title">Checking your session.</h1>
-          <p className="status-card__text">Please wait while your access is being resolved.</p>
+          <h1 className="status-card__title">Opening your workspace.</h1>
+          <p className="status-card__text">Please wait while we confirm your access.</p>
         </section>
       </main>
     );
