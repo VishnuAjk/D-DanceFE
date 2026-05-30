@@ -14,7 +14,7 @@ function unwrapData<T>(response: { data: ApiResponse<T> }) {
 export function markAttendance(payload: {
   batchId: string;
   date: string;
-  records: Array<{ childId: string; status: AttendanceStatus; notes?: string }>;
+  records: Array<{ studentProfileId: string; status: AttendanceStatus; notes?: string }>;
 }) {
   return apiClient
     .post<ApiResponse<InstructorAttendanceRecord[]>>('/api/instructor/attendance/mark', payload)
@@ -32,7 +32,7 @@ export function fetchInstructorAttendance(filters?: {
 }
 
 export function createAssessment(payload: {
-  childId: string;
+  studentProfileId: string;
   batchId: string;
   assessedAt?: string;
   overallScore?: number;

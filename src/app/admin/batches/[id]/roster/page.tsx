@@ -29,13 +29,13 @@ export default function BatchRosterPage() {
           </article>
         ) : rosterQuery.data?.length ? (
           rosterQuery.data.map((item) => {
-            const child = typeof item.childId === 'string' ? null : item.childId;
+            const student = typeof item.studentProfileId === 'string' ? null : item.studentProfileId;
 
             return (
               <article className="admin-panel" key={item._id}>
-                <h2 className="metric-card__title">{child?.name ?? 'Child record unavailable'}</h2>
+                <h2 className="metric-card__title">{student?.name ?? 'Student record unavailable'}</h2>
                 <div className="admin-meta">
-                  <span>{child?.gender ?? 'Unknown gender'}</span>
+                  <span>{student?.gender ?? 'Unknown gender'}</span>
                   <span>{item.status}</span>
                 </div>
               </article>
@@ -43,7 +43,7 @@ export default function BatchRosterPage() {
           })
         ) : (
           <article className="admin-panel">
-            <p className="dashboard__text">No enrolled children are currently visible for this batch.</p>
+            <p className="dashboard__text">No enrolled student profiles are currently visible for this batch.</p>
           </article>
         )}
       </section>

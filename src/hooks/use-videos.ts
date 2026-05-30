@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { fetchAdminVideos } from '@/lib/admin-api';
-import { fetchVideos } from '@/lib/parent-api';
+import { fetchVideos } from '@/lib/portal-api';
 
 export function useVideos(filters?: { courseId?: string; levelId?: string; tags?: string }) {
   return useQuery({

@@ -48,7 +48,7 @@ export interface Batch {
   isActive: boolean;
 }
 
-export interface Child {
+export interface Student {
   _id: string;
   name: string;
   dob: string;
@@ -59,13 +59,13 @@ export interface Child {
 export interface EnrollmentRosterItem {
   _id: string;
   status: string;
-  childId: string | Child;
+  studentProfileId: string | Student;
 }
 
 export interface AdminEnrollment {
   _id: string;
   status: 'PENDING' | 'APPROVED' | 'ACTIVE' | 'SUSPENDED' | 'CANCELLED';
-  childId: string | Child;
+  studentProfileId: string | Student;
   batchId: string | Batch;
   branchId: string | Branch | NamedRef;
   createdAt?: string;
@@ -86,7 +86,7 @@ export interface AdminFeeLedger {
   status: 'DUE' | 'PAID' | 'OVERDUE' | 'WAIVED';
   paidAt?: string;
   dueDate: string;
-  childId: string | Child;
+  studentProfileId: string | Student;
   branchId: string | Branch | NamedRef;
   enrollmentId: string | FeeLinkedEnrollment;
 }
@@ -132,7 +132,7 @@ export interface AttendanceReport {
     _id: string;
     date: string;
     status: 'PRESENT' | 'ABSENT' | 'LATE';
-    childName: string;
+    studentProfileName: string;
     notes?: string;
   }>;
 }

@@ -6,10 +6,10 @@ import { useAdminEnrollments } from '@/hooks/use-admin-enrollments';
 import { approveEnrollment, rejectEnrollment, suspendEnrollment } from '@/lib/admin-api';
 import { formatCurrency, formatSchedule, readReferenceLabel } from '@/lib/admin-format';
 import { formatApiError } from '@/lib/api-errors';
-import { formatBirthDate } from '@/lib/parent-format';
-import type { AdminEnrollment, Child } from '@/types/admin';
+import { formatBirthDate } from '@/lib/student-format';
+import type { AdminEnrollment, Student } from '@/types/admin';
 
-function getChild(value: string | Child) {
+function getStudent(value: string | Student) {
   return typeof value === 'string' ? null : value;
 }
 
@@ -33,7 +33,7 @@ export default function AdminEnrollmentsPage() {
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['admin-enrollments'] });
-      await queryClient.invalidateQueries({ queryKey: ['parent-enrollments'] });
+      await queryClient.invalidateQueries({ queryKey: ['portal-enrollments'] });
       setError(null);
     },
     onError: (mutationError) => setError(formatApiError(mutationError))
@@ -86,7 +86,7 @@ export default function AdminEnrollmentsPage() {
       <section className="admin-page__header">
         <div>
           <p className="dashboard__eyebrow">Enrollments</p>
-          <h1 className="admin-page__title">Review parent-submitted enrollment requests.</h1>
+          <h1 className="admin-page__title">Review student profile enrollment requests.</h1>
           <p className="dashboard__text">
             Pending requests are shown first so approvals stay operationally visible on smaller screens.
           </p>
@@ -119,14 +119,14 @@ export default function AdminEnrollmentsPage() {
           </article>
         ) : enrollmentsQuery.data?.length ? (
           enrollmentsQuery.data.map((enrollment) => {
-            const child = getChild(enrollment.childId);
+            const student = getStudent(enrollment.studentProfileId);
             const batch = typeof enrollment.batchId === 'string' ? null : enrollment.batchId;
 
             return (
               <article className="admin-panel" key={enrollment._id}>
                 <div className="admin-panel__header">
                   <div>
-                    <h2 className="metric-card__title">{child?.name ?? 'Child profile'}</h2>
+                    <h2 className="metric-card__title">{student?.name ?? 'Student profile'}</h2>
                     <p className="dashboard__text">
                       {batch?.name ?? 'Batch'} • {readReferenceLabel(enrollment.branchId, 'Branch')}
                     </p>
@@ -139,7 +139,7 @@ export default function AdminEnrollmentsPage() {
                   {batch ? `${formatSchedule(batch)} • ${formatCurrency(batch.monthlyFee)}` : 'Batch details unavailable'}
                 </p>
                 <p className="dashboard__text">
-                  {child ? `Child DOB: ${formatBirthDate(child.dob)} • ${child.gender}` : 'Child profile unavailable'}
+                  {student ? `Student DOB: ${formatBirthDate(student.dob)} • ${student.gender}` : 'Student profile unavailable'}
                 </p>
                 <div className="admin-panel__actions">{renderActions(enrollment)}</div>
               </article>

@@ -201,7 +201,7 @@ export default function AdminReportsPage() {
                 attendanceQuery.data.rows.map((row) => (
                   <div className="report-table__row" key={row._id} role="row">
                     <span role="cell">{new Date(row.date).toLocaleDateString('en-IN')}</span>
-                    <span role="cell">{row.childName}</span>
+                    <span role="cell">{row.studentProfileName}</span>
                     <span role="cell" className={`status-badge status-badge--${row.status.toLowerCase()}`}>
                       {row.status}
                     </span>
