@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { apiResponse, fulfillJson, mockLoggedOut, parentUser } from './helpers';
+import { apiResponse, fulfillJson, mockLoggedOut, customerUser } from './helpers';
 
 test('OTP login and redirect by role', async ({ page }) => {
   await mockLoggedOut(page);
@@ -7,7 +7,7 @@ test('OTP login and redirect by role', async ({ page }) => {
     fulfillJson(route, apiResponse({ txnId: 'txn-e2e', expiresIn: 60 }))
   );
   await page.route('**/api/auth/otp-verify', (route) =>
-    fulfillJson(route, apiResponse({ accessToken: 'parent-token', user: parentUser }))
+    fulfillJson(route, apiResponse({ accessToken: 'customer-token', user: customerUser }))
   );
 
   await page.goto('/login');
@@ -16,5 +16,5 @@ test('OTP login and redirect by role', async ({ page }) => {
   await page.getByLabel('One-Time Password').fill('123456');
   await page.getByRole('button', { name: 'Verify and continue' }).click();
 
-  await expect(page).toHaveURL(/\/parent$/);
+  await expect(page).toHaveURL(/\/portal$/);
 });

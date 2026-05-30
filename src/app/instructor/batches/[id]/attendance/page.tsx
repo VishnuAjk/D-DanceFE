@@ -6,11 +6,11 @@ import { useParams } from 'next/navigation';
 import { useMutation } from '@tanstack/react-query';
 import { useInstructorBatchRoster } from '@/hooks/use-instructor-batches';
 import { markAttendance } from '@/lib/instructor-api';
-import { calculateAge } from '@/lib/parent-format';
-import type { Child } from '@/types/admin';
+import { calculateAge } from '@/lib/student-format';
+import type { Student } from '@/types/admin';
 import type { AttendanceStatus } from '@/types/attendance';
 
-function readChild(value: string | Child) {
+function readStudent(value: string | Student) {
   return typeof value === 'string' ? null : value;
 }
 
@@ -52,11 +52,11 @@ export default function InstructorBatchAttendancePage() {
 
   const records = useMemo(() => {
     return roster
-      .map((entry) => readChild(entry.childId))
-      .filter((child): child is Child => Boolean(child?._id))
-      .map((child) => ({
-        child,
-        status: statuses[child._id] ?? null
+      .map((entry) => readStudent(entry.studentProfileId))
+      .filter((student): student is Student => Boolean(student?._id))
+      .map((student) => ({
+        student,
+        status: statuses[student._id] ?? null
       }));
   }, [roster, statuses]);
 
@@ -68,9 +68,9 @@ export default function InstructorBatchAttendancePage() {
         records: records
           .filter((record) => record.status)
           .map((record) => ({
-            childId: record.child._id,
+            studentProfileId: record.student._id,
             status: record.status as AttendanceStatus,
-            notes: notes[record.child._id] || undefined
+            notes: notes[record.student._id] || undefined
           }))
       }),
     onMutate: () => setError(null),
@@ -79,12 +79,12 @@ export default function InstructorBatchAttendancePage() {
 
   const canSubmit = records.some((record) => record.status) && !mutation.isPending;
 
-  function updateStatus(childId: string, status: AttendanceStatus) {
-    setStatuses((current) => ({ ...current, [childId]: status }));
+  function updateStatus(studentProfileId: string, status: AttendanceStatus) {
+    setStatuses((current) => ({ ...current, [studentProfileId]: status }));
   }
 
-  function updateNotes(childId: string, value: string) {
-    setNotes((current) => ({ ...current, [childId]: value.slice(0, 200) }));
+  function updateNotes(studentProfileId: string, value: string) {
+    setNotes((current) => ({ ...current, [studentProfileId]: value.slice(0, 200) }));
   }
 
   return (
@@ -93,7 +93,7 @@ export default function InstructorBatchAttendancePage() {
         <div>
           <p className="dashboard__eyebrow">Attendance</p>
           <h1 className="admin-page__title">{batch?.name ?? 'Mark attendance'}</h1>
-          <p className="dashboard__text">Pick a date, then mark each child as present, absent, or late.</p>
+          <p className="dashboard__text">Pick a date, then mark each student as present, absent, or late.</p>
         </div>
         <div className="admin-panel__actions">
           <Link className="button button--ghost" href={`/instructor/batches/${params.id}`}>
@@ -139,50 +139,50 @@ export default function InstructorBatchAttendancePage() {
             <p className="dashboard__text">Loading roster...</p>
           </article>
         ) : records.length ? (
-          records.map(({ child, status }) => (
-            <article className="admin-panel" key={child._id}>
+          records.map(({ student, status }) => (
+            <article className="admin-panel" key={student._id}>
               <div className="admin-panel__header">
                 <div>
-                  <h2 className="metric-card__title">{child.name}</h2>
-                  <p className="dashboard__text">{`${calculateAge(child.dob)} years • ${child.gender}`}</p>
+                  <h2 className="metric-card__title">{student.name}</h2>
+                  <p className="dashboard__text">{`${calculateAge(student.dob)} years • ${student.gender}`}</p>
                 </div>
               </div>
 
-              <div className="chip-row" role="group" aria-label={`Attendance status for ${child.name}`}>
+              <div className="chip-row" role="group" aria-label={`Attendance status for ${student.name}`}>
                 <button
                   type="button"
                   className={`chip${status === 'PRESENT' ? ' is-selected' : ''}`}
-                  onClick={() => updateStatus(child._id, 'PRESENT')}
+                  onClick={() => updateStatus(student._id, 'PRESENT')}
                 >
                   Present
                 </button>
                 <button
                   type="button"
                   className={`chip${status === 'ABSENT' ? ' is-selected' : ''}`}
-                  onClick={() => updateStatus(child._id, 'ABSENT')}
+                  onClick={() => updateStatus(student._id, 'ABSENT')}
                 >
                   Absent
                 </button>
                 <button
                   type="button"
                   className={`chip${status === 'LATE' ? ' is-selected' : ''}`}
-                  onClick={() => updateStatus(child._id, 'LATE')}
+                  onClick={() => updateStatus(student._id, 'LATE')}
                 >
                   Late
                 </button>
               </div>
 
               <div className="field">
-                <label className="field__label" htmlFor={`notes-${child._id}`}>
+                <label className="field__label" htmlFor={`notes-${student._id}`}>
                   Notes (optional)
                 </label>
                 <textarea
-                  id={`notes-${child._id}`}
+                  id={`notes-${student._id}`}
                   className="field__input"
                   rows={2}
-                  value={notes[child._id] ?? ''}
-                  onChange={(event) => updateNotes(child._id, event.target.value)}
-                  placeholder="Short note for this child"
+                  value={notes[student._id] ?? ''}
+                  onChange={(event) => updateNotes(student._id, event.target.value)}
+                  placeholder="Short note for this student"
                 />
               </div>
             </article>

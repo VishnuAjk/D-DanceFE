@@ -7,7 +7,7 @@ export function useFeeLedger(filters?: {
   branchId?: string;
   month?: string;
   status?: string;
-  childId?: string;
+  studentProfileId?: string;
 }) {
   return useQuery({
     queryKey: ['admin-fee-ledger', filters],

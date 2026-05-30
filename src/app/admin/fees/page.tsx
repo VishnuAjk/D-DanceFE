@@ -9,10 +9,10 @@ import { useFeeLedger } from '@/hooks/use-fee-ledger';
 import { discountFeeLedger, waiveFeeLedger } from '@/lib/admin-api';
 import { formatCurrency, readReferenceLabel } from '@/lib/admin-format';
 import { formatApiError } from '@/lib/api-errors';
-import { formatBirthDate } from '@/lib/parent-format';
-import type { AdminFeeLedger, Child, FeeLinkedEnrollment } from '@/types/admin';
+import { formatBirthDate } from '@/lib/student-format';
+import type { AdminFeeLedger, Student, FeeLinkedEnrollment } from '@/types/admin';
 
-function readChild(value: string | Child) {
+function readStudent(value: string | Student) {
   return typeof value === 'string' ? null : value;
 }
 
@@ -57,7 +57,7 @@ export default function AdminFeesPage() {
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['admin-fee-ledger'] });
-      await queryClient.invalidateQueries({ queryKey: ['parent-fees'] });
+      await queryClient.invalidateQueries({ queryKey: ['portal-fees'] });
       setSelectedLedger(null);
       setDiscountValue('');
       setError(null);
@@ -80,7 +80,7 @@ export default function AdminFeesPage() {
           <p className="dashboard__eyebrow">Fees</p>
           <h1 className="admin-page__title">Review ledger status, discounts, and waivers.</h1>
           <p className="dashboard__text">
-            Track monthly dues, apply approved discounts, and confirm fee status for each child.
+            Track monthly dues, apply approved discounts, and confirm fee status for each student.
           </p>
         </div>
         <div className="admin-panel__actions">
@@ -131,7 +131,7 @@ export default function AdminFeesPage() {
           </article>
         ) : feesQuery.data?.length ? (
           feesQuery.data.map((entry) => {
-            const child = readChild(entry.childId);
+            const student = readStudent(entry.studentProfileId);
             const enrollment = readEnrollment(entry.enrollmentId);
             const batch = enrollment && typeof enrollment.batchId !== 'string' ? enrollment.batchId : null;
 
@@ -139,7 +139,7 @@ export default function AdminFeesPage() {
               <article className="admin-panel" key={entry._id}>
                 <div className="admin-panel__header">
                   <div>
-                    <h2 className="metric-card__title">{child?.name ?? 'Child'}</h2>
+                    <h2 className="metric-card__title">{student?.name ?? 'Student'}</h2>
                     <p className="dashboard__text">
                       {entry.month} • {batch?.name ?? 'Batch'} • {readReferenceLabel(entry.branchId)}
                     </p>
@@ -148,7 +148,7 @@ export default function AdminFeesPage() {
                 </div>
 
                 <p className="dashboard__text">
-                  {child ? `Child DOB: ${formatBirthDate(child.dob)} • ${child.gender}` : 'Child profile unavailable'}
+                  {student ? `Student DOB: ${formatBirthDate(student.dob)} • ${student.gender}` : 'Student profile unavailable'}
                 </p>
                 <p className="dashboard__text">
                   Amount: {formatCurrency(entry.amount)} • Discount: {formatCurrency(entry.discount)}

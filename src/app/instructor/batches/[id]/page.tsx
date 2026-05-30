@@ -4,10 +4,10 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useInstructorBatchRoster } from '@/hooks/use-instructor-batches';
 import { formatCurrency, formatSchedule, readReferenceLabel } from '@/lib/admin-format';
-import { calculateAge } from '@/lib/parent-format';
-import type { Child } from '@/types/admin';
+import { calculateAge } from '@/lib/student-format';
+import type { Student } from '@/types/admin';
 
-function readChild(value: string | Child) {
+function readStudent(value: string | Student) {
   return typeof value === 'string' ? null : value;
 }
 
@@ -68,18 +68,18 @@ export default function InstructorBatchDetailPage() {
           </article>
         ) : roster.length ? (
           roster.map((entry) => {
-            const child = readChild(entry.childId);
+            const student = readStudent(entry.studentProfileId);
 
             return (
               <article className="admin-panel" key={entry._id}>
                 <div className="admin-panel__header">
                   <div>
-                    <h2 className="metric-card__title">{child?.name ?? 'Child profile'}</h2>
+                    <h2 className="metric-card__title">{student?.name ?? 'Student profile'}</h2>
                     <p className="dashboard__text">{entry.status}</p>
                   </div>
                 </div>
                 <p className="dashboard__text">
-                  {child ? `${calculateAge(child.dob)} years • ${child.gender}` : 'Child details unavailable'}
+                  {student ? `${calculateAge(student.dob)} years • ${student.gender}` : 'Student details unavailable'}
                 </p>
               </article>
             );

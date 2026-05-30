@@ -1,6 +1,6 @@
 export type AttendanceStatus = 'PRESENT' | 'ABSENT' | 'LATE';
 
-export interface AttendanceChildRef {
+export interface AttendanceStudentRef {
   _id: string;
   name: string;
   dob?: string;
@@ -15,14 +15,14 @@ export interface AttendanceBatchRef {
 
 export interface InstructorAttendanceRecord {
   _id: string;
-  childId: string | AttendanceChildRef;
+  studentProfileId: string | AttendanceStudentRef;
   batchId: string | AttendanceBatchRef;
   date: string;
   status: AttendanceStatus;
   notes?: string;
 }
 
-export interface ParentAttendanceRecord {
+export interface PortalAttendanceRecord {
   _id: string;
   date: string;
   status: AttendanceStatus;

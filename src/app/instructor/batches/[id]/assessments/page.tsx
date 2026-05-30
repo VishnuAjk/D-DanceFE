@@ -5,12 +5,12 @@ import { useMemo, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useInstructorBatchRoster } from '@/hooks/use-instructor-batches';
-import { calculateAge } from '@/lib/parent-format';
+import { calculateAge } from '@/lib/student-format';
 import { createAssessment, fetchInstructorAssessments, shareAssessment } from '@/lib/instructor-api';
-import type { Child } from '@/types/admin';
+import type { Student } from '@/types/admin';
 import type { InstructorAssessmentRecord } from '@/types/assessment';
 
-function readChild(value: string | Child) {
+function readStudent(value: string | Student) {
   return typeof value === 'string' ? null : value;
 }
 
@@ -56,7 +56,7 @@ export default function InstructorAssessmentsPage() {
   const rosterQuery = useInstructorBatchRoster(params.id);
   const batch = rosterQuery.data?.batch;
   const roster = rosterQuery.data?.roster ?? [];
-  const [selectedChildId, setSelectedChildId] = useState('');
+  const [selectedStudentId, setSelectedStudentId] = useState('');
   const [assessedAt, setAssessedAt] = useState(todayUtc());
   const [overallScore, setOverallScore] = useState('');
   const [remarks, setRemarks] = useState('');
@@ -69,16 +69,16 @@ export default function InstructorAssessmentsPage() {
     enabled: Boolean(params.id)
   });
 
-  const childOptions = roster
-    .map((entry) => readChild(entry.childId))
-    .filter((child): child is Child => Boolean(child?._id));
+  const studentProfileOptions = roster
+    .map((entry) => readStudent(entry.studentProfileId))
+    .filter((student): student is Student => Boolean(student?._id));
 
-  const selected = selectedChildId || childOptions[0]?._id || '';
+  const selected = selectedStudentId || studentProfileOptions[0]?._id || '';
 
   const createMutation = useMutation({
     mutationFn: () =>
       createAssessment({
-        childId: selected,
+        studentProfileId: selected,
         batchId: params.id,
         assessedAt,
         overallScore: readNumber(overallScore),
@@ -108,7 +108,7 @@ export default function InstructorAssessmentsPage() {
         <div>
           <p className="dashboard__eyebrow">Assessments</p>
           <h1 className="admin-page__title">{batch?.name ?? 'Batch assessments'}</h1>
-          <p className="dashboard__text">Capture progress notes and optionally share them with the parent.</p>
+          <p className="dashboard__text">Capture progress notes and optionally share them with the account.</p>
         </div>
         <div className="admin-panel__actions">
           <Link className="button button--ghost" href={`/instructor/batches/${params.id}`}>
@@ -120,20 +120,20 @@ export default function InstructorAssessmentsPage() {
       <section className="admin-panel stack">
         <div className="admin-form-grid">
           <div className="field">
-            <label className="field__label" htmlFor="child">
-              Child
+            <label className="field__label" htmlFor="student">
+              Student
             </label>
             <select
-              id="child"
+              id="student"
               className="field__input"
               value={selected}
-              onChange={(event) => setSelectedChildId(event.target.value)}
-              disabled={rosterQuery.isLoading || !childOptions.length}
+              onChange={(event) => setSelectedStudentId(event.target.value)}
+              disabled={rosterQuery.isLoading || !studentProfileOptions.length}
             >
-              {childOptions.length ? (
-                childOptions.map((child) => (
-                  <option key={child._id} value={child._id}>
-                    {child.name}
+              {studentProfileOptions.length ? (
+                studentProfileOptions.map((student) => (
+                  <option key={student._id} value={student._id}>
+                    {student.name}
                   </option>
                 ))
               ) : (
@@ -209,15 +209,15 @@ export default function InstructorAssessmentsPage() {
           </article>
         ) : records.length ? (
           records.map((record) => {
-            const child = typeof record.childId === 'string' ? null : record.childId;
+            const student = typeof record.studentProfileId === 'string' ? null : record.studentProfileId;
             const batchRef = typeof record.batchId === 'string' ? null : record.batchId;
-            const shareDisabled = Boolean(record.sharedWithParent) || shareMutation.isPending;
+            const shareDisabled = Boolean(record.sharedWithCustomer) || shareMutation.isPending;
 
             return (
               <article className="admin-panel" key={record._id}>
                 <div className="admin-panel__header">
                   <div>
-                    <h2 className="metric-card__title">{child?.name ?? 'Child'}</h2>
+                    <h2 className="metric-card__title">{student?.name ?? 'Student'}</h2>
                     <p className="dashboard__text">
                       {record.assessedAt.slice(0, 10)} • {batchRef?.name ?? 'Batch'}
                     </p>
@@ -228,13 +228,13 @@ export default function InstructorAssessmentsPage() {
                     disabled={shareDisabled}
                     onClick={() => void shareMutation.mutateAsync(record._id)}
                   >
-                    {record.sharedWithParent ? 'Shared' : shareMutation.isPending ? 'Sharing...' : 'Share'}
+                    {record.sharedWithCustomer ? 'Shared' : shareMutation.isPending ? 'Sharing...' : 'Share'}
                   </button>
                 </div>
 
-                {child ? (
+                {student ? (
                   <p className="dashboard__text">
-                    {child.dob ? `${calculateAge(child.dob)} years • ${child.gender}` : `${child.gender ?? 'Learner'}`}
+                    {student.dob ? `${calculateAge(student.dob)} years • ${student.gender}` : `${student.gender ?? 'Learner'}`}
                   </p>
                 ) : null}
 
