@@ -28,7 +28,7 @@ export default function DashboardRedirectPage() {
       <section className="status-card">
         <p className="status-card__eyebrow">Redirecting</p>
         <h1 className="status-card__title">Taking you to the right dashboard.</h1>
-        <p className="status-card__text">Your role-specific destination is being resolved.</p>
+        <p className="status-card__text">We are opening the workspace for your account.</p>
       </section>
     </main>
   );

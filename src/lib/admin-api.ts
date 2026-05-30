@@ -3,10 +3,14 @@ import apiClient from '@/lib/api-client';
 import type {
   AdminEnrollment,
   AdminFeeLedger,
+  AdminVideo,
+  AttendanceReport,
   Batch,
   Branch,
   Course,
-  EnrollmentRosterItem
+  EnrollmentRosterItem,
+  EnrollmentStatsReport,
+  RevenueReport
 } from '@/types/admin';
 
 function unwrapData<T>(response: { data: ApiResponse<T> }) {
@@ -140,5 +144,39 @@ export function waiveFeeLedger(ledgerId: string) {
 export function discountFeeLedger(ledgerId: string, payload: { discount: number; notes?: string }) {
   return apiClient
     .put<ApiResponse<AdminFeeLedger>>(`/api/admin/fees/ledger/${ledgerId}/discount`, payload)
+    .then(unwrapData);
+}
+
+export function fetchAdminVideos() {
+  return apiClient.get<ApiResponse<AdminVideo[]>>('/api/admin/videos').then(unwrapData);
+}
+
+export function createAdminVideo(payload: Record<string, unknown>) {
+  return apiClient.post<ApiResponse<AdminVideo>>('/api/admin/videos', payload).then(unwrapData);
+}
+
+export function updateAdminVideo(videoId: string, payload: Record<string, unknown>) {
+  return apiClient.put<ApiResponse<AdminVideo>>(`/api/admin/videos/${videoId}`, payload).then(unwrapData);
+}
+
+export function deleteAdminVideo(videoId: string) {
+  return apiClient.delete<ApiResponse<{ deleted: boolean }>>(`/api/admin/videos/${videoId}`).then(unwrapData);
+}
+
+export function fetchRevenueReport(filters: { branchId?: string; fromMonth: string; toMonth: string }) {
+  return apiClient
+    .get<ApiResponse<RevenueReport>>('/api/admin/reports/revenue', { params: filters })
+    .then(unwrapData);
+}
+
+export function fetchAttendanceReport(filters: { batchId: string; month: string }) {
+  return apiClient
+    .get<ApiResponse<AttendanceReport>>('/api/admin/reports/attendance', { params: filters })
+    .then(unwrapData);
+}
+
+export function fetchEnrollmentStatsReport(filters?: { branchId?: string }) {
+  return apiClient
+    .get<ApiResponse<EnrollmentStatsReport>>('/api/admin/reports/enrollment-stats', { params: filters })
     .then(unwrapData);
 }
