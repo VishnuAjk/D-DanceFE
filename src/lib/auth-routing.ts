@@ -13,7 +13,7 @@ export function resolveDashboardPath(role: string | undefined) {
     return '/instructor';
   }
 
-  if (role === UserRole.CUSTOMER || role === UserRole.PARENT) {
+  if (role === 'customer' || role === UserRole.PARENT) {
     return '/portal';
   }
 
