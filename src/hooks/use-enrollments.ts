@@ -5,25 +5,25 @@ import {
   fetchEnrollmentBatches,
   fetchEnrollmentBranches,
   fetchEnrollments
-} from '@/lib/parent-api';
+} from '@/lib/portal-api';
 
 export function useEnrollments() {
   return useQuery({
-    queryKey: ['parent-enrollments'],
+    queryKey: ['portal-enrollments'],
     queryFn: fetchEnrollments
   });
 }
 
 export function useEnrollmentBranches() {
   return useQuery({
-    queryKey: ['parent-enrollment-branches'],
+    queryKey: ['portal-enrollment-branches'],
     queryFn: fetchEnrollmentBranches
   });
 }
 
 export function useEnrollmentBatches(filters?: { branchId?: string; courseId?: string }) {
   return useQuery({
-    queryKey: ['parent-enrollment-batches', filters],
+    queryKey: ['portal-enrollment-batches', filters],
     queryFn: () => fetchEnrollmentBatches(filters),
     enabled: Boolean(filters?.branchId)
   });

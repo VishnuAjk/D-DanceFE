@@ -128,7 +128,7 @@ export function fetchFeeLedger(filters?: {
   branchId?: string;
   month?: string;
   status?: string;
-  childId?: string;
+  studentProfileId?: string;
 }) {
   return apiClient
     .get<ApiResponse<AdminFeeLedger[]>>('/api/admin/fees/ledger', { params: filters })

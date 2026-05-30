@@ -13,8 +13,8 @@ export function resolveDashboardPath(role: string | undefined) {
     return '/instructor';
   }
 
-  if (role === UserRole.PARENT) {
-    return '/parent';
+  if (role === UserRole.CUSTOMER || role === UserRole.PARENT) {
+    return '/portal';
   }
 
   return '/unauthorized';

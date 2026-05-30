@@ -178,7 +178,7 @@ export default function LoginPage() {
         <p className="auth-card__eyebrow">Secure OTP sign in</p>
         <h1 className="auth-card__title">Use your mobile number to continue.</h1>
         <p className="auth-card__text">
-          New parents can create an account with their mobile number. Instructors and admins
+          New students and families can create an account with their mobile number. Instructors and admins
           should use the number assigned by the studio.
         </p>
         <div className="auth-stepper" aria-label="Login progress">
@@ -272,7 +272,7 @@ export default function LoginPage() {
           )}
         </div>
         <p className="auth-card__helper">
-          Parents can sign up here directly. Instructor and admin access is created by the studio
+          Students and families can sign up here directly. Instructor and admin access is created by the studio
           team before first sign-in.
         </p>
         <Link className="auth-card__link" href="/">

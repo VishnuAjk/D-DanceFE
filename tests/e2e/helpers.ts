@@ -12,14 +12,14 @@ export const ids = {
   course: '64f000000000000000000002',
   level: '64f000000000000000000003',
   batch: '64f000000000000000000004',
-  child: '64f000000000000000000005',
+  student: '64f000000000000000000005',
   enrollment: '64f000000000000000000006'
 };
 
-export const parentUser: AuthUser = {
+export const customerUser: AuthUser = {
   _id: '64f000000000000000000101',
-  name: 'Parent User',
-  role: 'parent',
+  name: 'Customer User',
+  role: 'customer',
   phone: '9999999999'
 };
 
@@ -105,9 +105,9 @@ export function batch() {
   };
 }
 
-export function child() {
+export function student() {
   return {
-    _id: ids.child,
+    _id: ids.student,
     name: 'Anaya Rao',
     dob: '2015-06-15T00:00:00.000Z',
     gender: 'female',
@@ -119,7 +119,7 @@ export function child() {
 export function enrollment(status = 'PENDING') {
   return {
     _id: ids.enrollment,
-    childId: child(),
+    studentProfileId: student(),
     batchId: batch(),
     branchId: branch(),
     status,

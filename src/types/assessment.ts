@@ -4,7 +4,7 @@ export interface SkillScoreInput {
   notes?: string;
 }
 
-export interface AssessmentChildRef {
+export interface AssessmentStudentRef {
   _id: string;
   name: string;
   dob?: string;
@@ -19,15 +19,15 @@ export interface AssessmentBatchRef {
 
 export interface InstructorAssessmentRecord {
   _id: string;
-  childId: string | AssessmentChildRef;
+  studentProfileId: string | AssessmentStudentRef;
   batchId: string | AssessmentBatchRef;
   assessedAt: string;
   overallScore?: number;
   remarks?: string;
   skillScores?: SkillScoreInput[];
-  sharedWithParent?: boolean;
+  sharedWithCustomer?: boolean;
   sharedAt?: string;
 }
 
-export type ParentAssessmentRecord = InstructorAssessmentRecord;
+export type PortalAssessmentRecord = InstructorAssessmentRecord;
 
