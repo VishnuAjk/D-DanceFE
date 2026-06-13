@@ -9,7 +9,7 @@ importers:
   .:
     dependencies:
       '@danceapp/shared':
-        specifier: git+https://github.com/VishnuAjk/D-DanceShared.git#main
+        specifier: https://codeload.github.com/VishnuAjk/D-DanceShared/tar.gz/6f57401e7da9c75025f2c0987e2527897b1e7c04
         version: https://codeload.github.com/VishnuAjk/D-DanceShared/tar.gz/6f57401e7da9c75025f2c0987e2527897b1e7c04
       '@tanstack/react-query':
         specifier: ^5.51.1
