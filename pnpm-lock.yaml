@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@danceapp/shared':
-        specifier: file:../D-DanceShared
-        version: file:../D-DanceShared
+        specifier: git+https://github.com/VishnuAjk/D-DanceShared.git#feat/customer-student-portal
+        version: https://codeload.github.com/VishnuAjk/D-DanceShared/tar.gz/4df40d1f42a78cb8fb1cc3258ab528e5a1eecedf
       '@tanstack/react-query':
         specifier: ^5.51.1
         version: 5.95.2(react@18.3.1)
@@ -88,8 +88,9 @@ packages:
     resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
     engines: {node: '>=10'}
 
-  '@danceapp/shared@file:../D-DanceShared':
-    resolution: {directory: ../D-DanceShared, type: directory}
+  '@danceapp/shared@https://codeload.github.com/VishnuAjk/D-DanceShared/tar.gz/4df40d1f42a78cb8fb1cc3258ab528e5a1eecedf':
+    resolution: {tarball: https://codeload.github.com/VishnuAjk/D-DanceShared/tar.gz/4df40d1f42a78cb8fb1cc3258ab528e5a1eecedf}
+    version: 0.1.0
 
   '@esbuild/aix-ppc64@0.21.5':
     resolution: {integrity: sha512-1SDgH6ZSPTlggy1yI6+Dbkiz8xzpHJEVAlF/AM1tHPLsf5STom9rwtjE4hKAF20FfXXNTFqEYXyJNWh1GiZedQ==}
@@ -1610,7 +1611,7 @@ snapshots:
 
   '@alloc/quick-lru@5.2.0': {}
 
-  '@danceapp/shared@file:../D-DanceShared':
+  '@danceapp/shared@https://codeload.github.com/VishnuAjk/D-DanceShared/tar.gz/4df40d1f42a78cb8fb1cc3258ab528e5a1eecedf':
     dependencies:
       zod: 3.25.76
 
