@@ -10,13 +10,14 @@ export function PortalDashboard() {
   const summary = summaryQuery.data;
 
   return (
-    <main className="family-page">
-      <section className="dashboard__hero">
-        <p className="dashboard__eyebrow">Student Portal</p>
-        <h1 className="dashboard__title">Your student profiles, classes, fees, and progress.</h1>
+    <main className="family-page dashboard-home">
+      <section className="dashboard__hero dashboard-home__hero">
+        <div><p className="dashboard__eyebrow">Student portal</p>
+        <h1 className="dashboard__title">Everything for your dance journey.</h1>
         <p className="dashboard__text">
           Add student profiles, request classes, and follow updates from the studio in one place.
-        </p>
+        </p></div>
+        <Link className="button button--primary dashboard-home__hero-action" href="/portal/enrollments/new">Find a class</Link>
       </section>
 
       {!summaryQuery.isLoading && (summary?.studentProfilesCount ?? 0) === 0 ? (
@@ -37,60 +38,24 @@ export function PortalDashboard() {
         </section>
       ) : null}
 
-      <section className="dashboard__grid">
-        <article className="metric-card">
-          <h2>Student Profiles count</h2>
-          <p>
-            {summaryQuery.isLoading
-              ? 'Loading profile summary...'
-              : `${summary?.studentProfilesCount ?? 0} student profiles in your account`}
-          </p>
+      <section className="dashboard__grid dashboard-stat-grid" aria-label="Account summary">
+        <article className="metric-card dashboard-stat">
+          <span className="dashboard-stat__label">Students</span><strong className="dashboard-stat__value">{summaryQuery.isLoading ? '—' : summary?.studentProfilesCount ?? 0}</strong><p>Profiles in account</p>
         </article>
-        <article className="metric-card">
-          <h2>Active enrollments</h2>
-          <p>
-            {summaryQuery.isLoading
-              ? 'Checking active enrollments...'
-              : `${summary?.activeEnrollmentsCount ?? 0} approved or active enrollments`}
-          </p>
+        <article className="metric-card dashboard-stat">
+          <span className="dashboard-stat__label">Enrollments</span><strong className="dashboard-stat__value">{summaryQuery.isLoading ? '—' : summary?.activeEnrollmentsCount ?? 0}</strong><p>Approved or active</p>
         </article>
-        <article className="metric-card">
-          <h2>Upcoming fee due</h2>
-          <p>
-            {summaryQuery.isLoading
-              ? 'Checking fee ledger...'
-              : summary?.upcomingFee
-                ? `${formatCurrency(summary.upcomingFee.amount)} for ${summary.upcomingFee.studentProfileName} on ${new Date(summary.upcomingFee.dueDate).toLocaleDateString('en-IN')}`
-                : 'No due fee entry is currently visible'}
-          </p>
+        <article className="metric-card dashboard-stat dashboard-stat--wide">
+          <span className="dashboard-stat__label">Upcoming fee</span><strong className="dashboard-stat__value dashboard-stat__value--currency">{summaryQuery.isLoading ? '—' : summary?.upcomingFee ? formatCurrency(summary.upcomingFee.amount) : 'All clear'}</strong><p>{summary?.upcomingFee ? `${summary.upcomingFee.studentProfileName} • ${new Date(summary.upcomingFee.dueDate).toLocaleDateString('en-IN')}` : 'Nothing currently due'}</p>
         </article>
-        <article className="metric-card">
-          <h2>Next class schedule</h2>
-          <p>
-            {summaryQuery.isLoading
-              ? 'Checking class schedule...'
-              : summary?.nextClass
-                ? `${summary.nextClass.studentProfileName} • ${summary.nextClass.batchName} • ${formatBirthDateTime(summary.nextClass.startsAt)}`
-                : 'No upcoming approved class is currently visible'}
-          </p>
+        <article className="metric-card dashboard-stat dashboard-stat--wide">
+          <span className="dashboard-stat__label">Next class</span><strong className="dashboard-stat__value dashboard-stat__value--text">{summaryQuery.isLoading ? 'Loading…' : summary?.nextClass?.batchName ?? 'No class scheduled'}</strong><p>{summary?.nextClass ? `${summary.nextClass.studentProfileName} • ${formatBirthDateTime(summary.nextClass.startsAt)}` : 'Approved classes appear here'}</p>
         </article>
-        <article className="metric-card">
-          <h2>Attendance summary</h2>
-          <p>
-            {summaryQuery.isLoading
-              ? 'Checking recent attendance...'
-              : summary && summary.recentAttendanceSummary.percentage !== null
-                ? `${summary.recentAttendanceSummary.percentage}% over the last ${summary.recentAttendanceSummary.totalClasses} classes`
-                : 'Attendance summary will appear once classes are marked'}
-          </p>
+        <article className="metric-card dashboard-stat">
+          <span className="dashboard-stat__label">Attendance</span><strong className="dashboard-stat__value">{summaryQuery.isLoading ? '—' : summary?.recentAttendanceSummary.percentage !== null && summary?.recentAttendanceSummary.percentage !== undefined ? `${summary.recentAttendanceSummary.percentage}%` : '—'}</strong><p>Recent classes</p>
         </article>
-        <article className="metric-card">
-          <h2>Next action</h2>
-          <p>
-            {(summary?.studentProfilesCount ?? 0) === 0
-              ? 'Start by adding your first student profile.'
-              : 'Keep enrollments moving and monitor approvals from the status page.'}
-          </p>
+        <article className="metric-card dashboard-stat">
+          <span className="dashboard-stat__label">Next step</span><strong className="dashboard-stat__value dashboard-stat__value--text">{(summary?.studentProfilesCount ?? 0) === 0 ? 'Add student' : 'Stay updated'}</strong><p>{(summary?.studentProfilesCount ?? 0) === 0 ? 'Create a profile' : 'Monitor approvals'}</p>
         </article>
       </section>
 
@@ -112,8 +77,8 @@ export function PortalDashboard() {
       ) : null}
 
       <section className="admin-callout">
-        <p className="dashboard__eyebrow">Quick actions</p>
-        <div className="admin-callout__links">
+        <div className="dashboard-section-heading"><div><p className="dashboard__eyebrow">Quick actions</p><h2>What would you like to do?</h2></div></div>
+        <div className="admin-callout__links dashboard-action-grid">
           <Link className="button button--primary" href="/portal/student-profiles">
             Manage student profiles
           </Link>

@@ -22,6 +22,22 @@ export default defineConfig({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] }
+    },
+    {
+      name: 'mobile-chrome',
+      use: { ...devices['Pixel 5'], viewport: { width: 390, height: 844 } }
+    },
+    {
+      name: 'small-mobile',
+      use: { ...devices['Pixel 5'], viewport: { width: 320, height: 568 } }
+    },
+    {
+      name: 'mobile-safari',
+      use: { ...devices['iPhone 13'] }
+    },
+    {
+      name: 'tablet',
+      use: { ...devices['iPad (gen 7)'], viewport: { width: 768, height: 1024 } }
     }
   ]
 });

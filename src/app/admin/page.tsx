@@ -16,55 +16,44 @@ export default function AdminHomePage() {
   const monthlyPotential = activeBatches.reduce((total, batch) => total + batch.monthlyFee, 0);
 
   return (
-    <main className="admin-page">
-      <section className="dashboard__hero">
-        <p className="dashboard__eyebrow">Admin Dashboard</p>
-        <h1 className="dashboard__title">Overview for branches, batches, enrollments, and fees.</h1>
+    <main className="admin-page dashboard-home">
+      <section className="dashboard__hero dashboard-home__hero">
+        <div>
+        <p className="dashboard__eyebrow">Admin overview</p>
+        <h1 className="dashboard__title">Your studio today.</h1>
         <p className="dashboard__text">
           Review the studio at a glance and jump into the areas that need your attention.
         </p>
+        </div>
+        <Link className="button button--primary dashboard-home__hero-action" href="/admin/enrollments">Review requests</Link>
       </section>
 
-      <section className="dashboard__grid">
-        <article className="metric-card">
-          <h2>Total branches</h2>
-          <p>
-            {branchesQuery.isError
-              ? 'Restricted for your role'
-              : branchesQuery.isLoading
-                ? 'Loading branch visibility...'
-                : `${branches.length} branch records available`}
-          </p>
+      <section className="dashboard__grid dashboard-stat-grid" aria-label="Studio summary">
+        <article className="metric-card dashboard-stat">
+          <span className="dashboard-stat__label">Branches</span>
+          <strong className="dashboard-stat__value">{branchesQuery.isLoading ? '—' : branchesQuery.isError ? '—' : branches.length}</strong>
+          <p>{branchesQuery.isError ? 'Restricted for your role' : 'Visible locations'}</p>
         </article>
-        <article className="metric-card">
-          <h2>Active batches</h2>
-          <p>
-            {batchesQuery.isLoading
-              ? 'Loading batch data...'
-              : `${activeBatches.length} active batches across the current admin scope`}
-          </p>
+        <article className="metric-card dashboard-stat">
+          <span className="dashboard-stat__label">Active batches</span>
+          <strong className="dashboard-stat__value">{batchesQuery.isLoading ? '—' : activeBatches.length}</strong>
+          <p>Current admin scope</p>
         </article>
-        <article className="metric-card">
-          <h2>Monthly fee potential</h2>
-          <p>
-            {batchesQuery.isLoading
-              ? 'Calculating fee footprint...'
-              : `${formatCurrency(monthlyPotential)} across active batches`}
-          </p>
+        <article className="metric-card dashboard-stat dashboard-stat--wide">
+          <span className="dashboard-stat__label">Monthly potential</span>
+          <strong className="dashboard-stat__value dashboard-stat__value--currency">{batchesQuery.isLoading ? '—' : formatCurrency(monthlyPotential)}</strong>
+          <p>Across active batches</p>
         </article>
-        <article className="metric-card">
-          <h2>Pending enrollments</h2>
-          <p>
-            {enrollmentsQuery.isLoading
-              ? 'Loading enrollment queue...'
-              : `${enrollmentsQuery.data?.length ?? 0} requests are waiting for admin review`}
-          </p>
+        <article className="metric-card dashboard-stat dashboard-stat--attention">
+          <span className="dashboard-stat__label">Needs review</span>
+          <strong className="dashboard-stat__value">{enrollmentsQuery.isLoading ? '—' : enrollmentsQuery.data?.length ?? 0}</strong>
+          <p>Enrollment requests</p>
         </article>
       </section>
 
       <section className="admin-callout">
-        <p className="dashboard__eyebrow">Quick access</p>
-        <div className="admin-callout__links">
+        <div className="dashboard-section-heading"><div><p className="dashboard__eyebrow">Quick access</p><h2>Manage the studio</h2></div><span>Open a workspace</span></div>
+        <div className="admin-callout__links dashboard-action-grid">
           <Link className="button button--primary" href="/admin/branches">
             Manage branches
           </Link>
