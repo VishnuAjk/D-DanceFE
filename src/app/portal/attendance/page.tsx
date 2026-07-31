@@ -161,6 +161,15 @@ export default function CustomerAttendancePage() {
             <span className="calendar-dot calendar-dot--none" /> No record
           </span>
         </div>
+
+        <div className="attendance-record-list" aria-label="Attendance records by date">
+          {records.length ? records.slice().sort((a, b) => b.date.localeCompare(a.date)).map((record) => (
+            <div className="attendance-record-list__item" key={record._id}>
+              <time dateTime={record.date}>{new Date(`${record.date}T00:00:00`).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</time>
+              <span className={`status-badge status-badge--${record.status.toLowerCase()}`}>{record.status}</span>
+            </div>
+          )) : <p className="dashboard__text">No attendance records are available for this month.</p>}
+        </div>
       </section>
     </main>
   );

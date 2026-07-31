@@ -1,22 +1,9 @@
-import Link from 'next/link';
+import { PublicNav } from '@/components/public-nav';
 
 export default function AboutUsPage() {
   return (
     <main className="public-page">
-      <nav className="landing__nav" aria-label="Main navigation">
-        <Link className="landing__nav-link" href="/">
-          Home
-        </Link>
-        <Link className="landing__nav-link is-active" href="/about-us">
-          About us
-        </Link>
-        <Link className="landing__nav-link" href="/contact-us">
-          Contact us
-        </Link>
-        <Link className="landing__nav-link landing__nav-link--cta" href="/login">
-          Sign in
-        </Link>
-      </nav>
+      <PublicNav />
 
       <section className="public-page__hero">
         <p className="landing__eyebrow">About The Dance Studio</p>

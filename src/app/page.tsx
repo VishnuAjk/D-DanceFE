@@ -1,26 +1,14 @@
 import Link from 'next/link';
+import { PublicNav } from '@/components/public-nav';
 
 export default function HomePage() {
   return (
     <main className="landing">
-      <nav className="landing__nav" aria-label="Main navigation">
-        <Link className="landing__nav-link is-active" href="/">
-          Home
-        </Link>
-        <Link className="landing__nav-link" href="/about-us">
-          About us
-        </Link>
-        <Link className="landing__nav-link" href="/contact-us">
-          Contact us
-        </Link>
-        <Link className="landing__nav-link landing__nav-link--cta" href="/login">
-          Sign in
-        </Link>
-      </nav>
+      <PublicNav />
 
       <section className="landing__hero" aria-labelledby="home-title">
         <div className="landing__copy">
-          <p className="landing__eyebrow">Welcome to</p>
+          <p className="landing__eyebrow landing__eyebrow--pill">Dance • Learn • Perform</p>
           <div className="landing__brand-card" aria-label="The Dance Studio">
             <span className="landing__brand-kicker">The</span>
             <h1 id="home-title" className="landing__brand-title">
@@ -35,31 +23,36 @@ export default function HomePage() {
             <span className="landing__brand-line" />
           </div>
           <p className="landing__lede">
-            Grace, discipline, and joyful movement for every age group. Join a studio where
-            students learn with care, families stay connected, and every performance begins
-            with confidence.
+            Thoughtful dance training for every age, with simple class, fee, and progress updates for families.
           </p>
 
           <div className="landing__actions">
             <Link className="button button--primary" href="/login">
-              Sign in
+              Join or sign in
+            </Link>
+            <Link className="button button--ghost" href="/about-us">
+              Explore the studio
             </Link>
           </div>
-
+          <div className="landing__trust" aria-label="Studio highlights">
+            <span><strong>40+</strong> years teaching</span>
+            <span><strong>All ages</strong> welcomed</span>
+            <span><strong>1 hub</strong> for families</span>
+          </div>
         </div>
 
         <aside className="landing__info" aria-label="About The Dance Studio">
           <p className="landing__info-label">Est. 1983</p>
-          <h2>Classical, contemporary, and creative dance training.</h2>
+          <h2>Find your rhythm. Build your confidence.</h2>
           <p>
             Structured classes, experienced instructors, and a welcoming environment for
             beginners, growing performers, and dedicated dance families.
           </p>
-          <div className="landing__info-grid">
-            <span>Kids batches</span>
-            <span>Adult classes</span>
-            <span>Stage practice</span>
-            <span>Progress reviews</span>
+          <div className="landing__info-grid" aria-label="Available programs">
+            <span><b aria-hidden="true">01</b> Kids batches</span>
+            <span><b aria-hidden="true">02</b> Adult classes</span>
+            <span><b aria-hidden="true">03</b> Stage practice</span>
+            <span><b aria-hidden="true">04</b> Progress reviews</span>
           </div>
         </aside>
       </section>

@@ -193,7 +193,7 @@ export default function InstructorAssessmentsPage() {
         ) : null}
 
         <button
-          className="button button--primary"
+          className="button button--primary sticky-primary-action"
           type="button"
           disabled={!selected || createMutation.isPending}
           onClick={() => void createMutation.mutateAsync()}

@@ -25,47 +25,28 @@ export function InstructorDashboard() {
   const estimatedRoster = todays.reduce((total, batch) => total + batch.capacity, 0);
 
   return (
-    <main className="family-page">
-      <section className="dashboard__hero">
-        <p className="dashboard__eyebrow">Instructor Dashboard</p>
-        <h1 className="dashboard__title">See today&apos;s teaching load and jump into rosters fast.</h1>
+    <main className="family-page dashboard-home">
+      <section className="dashboard__hero dashboard-home__hero">
+        <div><p className="dashboard__eyebrow">Instructor overview</p>
+        <h1 className="dashboard__title">Ready for today&apos;s classes.</h1>
         <p className="dashboard__text">
           Review assigned batches, open rosters, mark attendance, and record progress after class.
-        </p>
+        </p></div>
+        <Link className="button button--primary dashboard-home__hero-action" href="/instructor/batches">Open batches</Link>
       </section>
 
-      <section className="dashboard__grid">
-        <article className="metric-card">
-          <h2>My active batches</h2>
-          <p>
-            {batchesQuery.isLoading
-              ? 'Loading assignments...'
-              : `${batches.length} assigned batches are currently visible`}
-          </p>
+      <section className="dashboard__grid dashboard-stat-grid" aria-label="Teaching summary">
+        <article className="metric-card dashboard-stat">
+          <span className="dashboard-stat__label">My batches</span><strong className="dashboard-stat__value">{batchesQuery.isLoading ? '—' : batches.length}</strong><p>Active assignments</p>
         </article>
-        <article className="metric-card">
-          <h2>Today&apos;s batches</h2>
-          <p>
-            {batchesQuery.isLoading
-              ? 'Checking today&apos;s schedule...'
-              : `${todays.length} batches are scheduled for today`}
-          </p>
+        <article className="metric-card dashboard-stat dashboard-stat--attention">
+          <span className="dashboard-stat__label">Today</span><strong className="dashboard-stat__value">{batchesQuery.isLoading ? '—' : todays.length}</strong><p>Scheduled classes</p>
         </article>
-        <article className="metric-card">
-          <h2>Estimated seats today</h2>
-          <p>
-            {batchesQuery.isLoading
-              ? 'Calculating roster load...'
-              : `${estimatedRoster} planned seats across today&apos;s batches`}
-          </p>
+        <article className="metric-card dashboard-stat">
+          <span className="dashboard-stat__label">Seats today</span><strong className="dashboard-stat__value">{batchesQuery.isLoading ? '—' : estimatedRoster}</strong><p>Planned capacity</p>
         </article>
-        <article className="metric-card">
-          <h2>Next up</h2>
-          <p>
-            {nextUp
-              ? `${nextUp.name} • ${nextUp.schedule.startTime} • ${readReferenceLabel(nextUp.branchId)}`
-              : 'No batch remains on today&apos;s schedule'}
-          </p>
+        <article className="metric-card dashboard-stat dashboard-stat--wide">
+          <span className="dashboard-stat__label">Next up</span><strong className="dashboard-stat__value dashboard-stat__value--text">{nextUp?.name ?? 'Schedule clear'}</strong><p>{nextUp ? `${nextUp.schedule.startTime} • ${readReferenceLabel(nextUp.branchId)}` : 'No batch remains today'}</p>
         </article>
       </section>
 
@@ -88,8 +69,8 @@ export function InstructorDashboard() {
       ) : null}
 
       <section className="admin-callout">
-        <p className="dashboard__eyebrow">Quick actions</p>
-        <div className="admin-callout__links">
+        <div className="dashboard-section-heading"><div><p className="dashboard__eyebrow">Quick actions</p><h2>Teaching tools</h2></div></div>
+        <div className="admin-callout__links dashboard-action-grid">
           <Link className="button button--primary" href="/instructor/batches">
             View all batches
           </Link>

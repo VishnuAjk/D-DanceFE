@@ -124,7 +124,7 @@ export default function InstructorBatchAttendancePage() {
         ) : null}
 
         <button
-          className="button button--primary"
+          className="button button--primary sticky-primary-action"
           disabled={!canSubmit}
           type="button"
           onClick={() => void mutation.mutateAsync()}
@@ -196,4 +196,3 @@ export default function InstructorBatchAttendancePage() {
     </main>
   );
 }
-
