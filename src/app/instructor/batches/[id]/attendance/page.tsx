@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { useMutation } from '@tanstack/react-query';
+import { DemoMutationButton } from '@/components/demo-mutation-button';
 import { useInstructorBatchRoster } from '@/hooks/use-instructor-batches';
 import { markAttendance } from '@/lib/instructor-api';
 import { calculateAge } from '@/lib/student-format';
@@ -123,14 +124,14 @@ export default function InstructorBatchAttendancePage() {
           </div>
         ) : null}
 
-        <button
+        <DemoMutationButton
           className="button button--primary sticky-primary-action"
           disabled={!canSubmit}
           type="button"
           onClick={() => void mutation.mutateAsync()}
         >
           {mutation.isPending ? 'Saving attendance...' : 'Save attendance'}
-        </button>
+        </DemoMutationButton>
       </section>
 
       <section className="family-grid">

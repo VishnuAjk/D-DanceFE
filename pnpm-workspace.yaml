@@ -1,5 +1,9 @@
 packages:
   - "."
 
+allowBuilds:
+  esbuild: true
+
 onlyBuiltDependencies:
   - "@danceapp/shared"
+  - esbuild

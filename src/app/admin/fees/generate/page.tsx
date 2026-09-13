@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useBranches } from '@/hooks/use-branches';
 import { generateFeeLedger } from '@/lib/admin-api';
+import { DemoMutationButton } from '@/components/demo-mutation-button';
 import { formatApiError } from '@/lib/api-errors';
 
 function currentMonth() {
@@ -62,9 +63,9 @@ export default function GenerateFeesPage() {
         {error ? <div className="auth-feedback auth-feedback--error">{error}</div> : null}
 
         <div className="admin-panel__actions">
-          <button className="button button--primary" type="button" disabled={mutation.isPending} onClick={() => void mutation.mutateAsync()}>
+          <DemoMutationButton className="button button--primary" type="button" disabled={mutation.isPending} onClick={() => void mutation.mutateAsync()}>
             {mutation.isPending ? 'Generating...' : 'Generate fee ledger'}
-          </button>
+          </DemoMutationButton>
         </div>
       </section>
     </main>

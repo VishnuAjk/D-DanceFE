@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
 import { EntityModal } from '@/components/admin/entity-modal';
+import { DemoMutationButton } from '@/components/demo-mutation-button';
 import { useBatches } from '@/hooks/use-batches';
 import { useBranches } from '@/hooks/use-branches';
 import { useCourses } from '@/hooks/use-courses';
@@ -300,9 +301,9 @@ export default function BatchesPage() {
               />
             </label>
             {error ? <div className="auth-feedback auth-feedback--error">{error}</div> : null}
-            <button className="button button--primary" disabled={saveMutation.isPending} type="submit">
+            <DemoMutationButton className="button button--primary" disabled={saveMutation.isPending} type="submit">
               {saveMutation.isPending ? 'Saving...' : 'Save batch'}
-            </button>
+            </DemoMutationButton>
           </form>
         </EntityModal>
       ) : null}

@@ -3,6 +3,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { EntityModal } from '@/components/admin/entity-modal';
+import { DemoMutationButton } from '@/components/demo-mutation-button';
 import { useCourses } from '@/hooks/use-courses';
 import { createCourse, createLevel, updateCourse, updateLevel } from '@/lib/admin-api';
 import { formatApiError } from '@/lib/api-errors';
@@ -194,9 +195,9 @@ export default function CoursesPage() {
               />
             </label>
             {error ? <div className="auth-feedback auth-feedback--error">{error}</div> : null}
-            <button className="button button--primary" disabled={courseMutation.isPending} type="submit">
+            <DemoMutationButton className="button button--primary" disabled={courseMutation.isPending} type="submit">
               {courseMutation.isPending ? 'Saving...' : 'Save course'}
-            </button>
+            </DemoMutationButton>
           </form>
         </EntityModal>
       ) : null}
@@ -232,9 +233,9 @@ export default function CoursesPage() {
               />
             </label>
             {error ? <div className="auth-feedback auth-feedback--error">{error}</div> : null}
-            <button className="button button--primary" disabled={levelMutation.isPending} type="submit">
+            <DemoMutationButton className="button button--primary" disabled={levelMutation.isPending} type="submit">
               {levelMutation.isPending ? 'Saving...' : 'Save level'}
-            </button>
+            </DemoMutationButton>
           </form>
         </EntityModal>
       ) : null}

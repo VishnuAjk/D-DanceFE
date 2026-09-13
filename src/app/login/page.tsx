@@ -18,6 +18,19 @@ interface OtpVerifyResponse {
   user: AuthUser;
 }
 
+interface DemoAccount {
+  name: string;
+  role: string;
+  phone: string;
+  description: string;
+}
+
+interface DemoConfig {
+  enabled: boolean;
+  otpCode?: string;
+  accounts: DemoAccount[];
+}
+
 const PHONE_REGEX = /^[6-9]\d{9}$/;
 const OTP_REGEX = /^\d{6}$/;
 
@@ -54,9 +67,11 @@ export default function LoginPage() {
   const [isSending, setIsSending] = useState(false);
   const [isVerifying, setIsVerifying] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [demoConfig, setDemoConfig] = useState<DemoConfig | null>(null);
 
   const canSend = PHONE_REGEX.test(phone) && !isSending;
   const canVerify = OTP_REGEX.test(otp) && !isVerifying;
+  const selectedDemoAccount = demoConfig?.accounts.find((account) => account.phone === phone);
   const resendLabel = useMemo(() => {
     if (resendLeft <= 0) {
       return 'Resend OTP';
@@ -77,6 +92,23 @@ export default function LoginPage() {
       router.replace(resolveDashboardPath(user.role));
     }
   }, [isLoading, router, user]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    apiClient
+      .get<ApiResponse<DemoConfig>>('/api/auth/demo-config')
+      .then((response) => {
+        if (isMounted && response.data.data) {
+          setDemoConfig(response.data.data);
+        }
+      })
+      .catch(() => undefined);
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   useEffect(() => {
     if (resendLeft <= 0) {
@@ -150,6 +182,16 @@ export default function LoginPage() {
     setOtp(value.replace(/\D/g, '').slice(0, 6));
   }
 
+  function selectDemoAccount(account: DemoAccount) {
+    setPhone(account.phone);
+    setStep('phone');
+    setOtp('');
+    setTxnId('');
+    setResendLeft(0);
+    setError(null);
+    window.requestAnimationFrame(() => document.getElementById('phone')?.focus());
+  }
+
   function resetToPhoneStep() {
     setStep('phone');
     setOtp('');
@@ -178,9 +220,37 @@ export default function LoginPage() {
         <p className="auth-card__eyebrow">Secure OTP sign in</p>
         <h1 className="auth-card__title">Use your mobile number to continue.</h1>
         <p className="auth-card__text">
-          New students and families can create an account with their mobile number. Instructors and admins
-          should use the number assigned by the studio.
+          {demoConfig?.enabled
+            ? 'Choose a demo role, then follow the familiar OTP steps to explore its workspace.'
+            : 'New students and families can create an account with their mobile number. Instructors and admins should use the number assigned by the studio.'}
         </p>
+        {demoConfig?.enabled ? (
+          <section className="demo-login" aria-labelledby="demo-login-title">
+            <div className="demo-login__header">
+              <div>
+                <p className="auth-card__eyebrow">Explore the demo</p>
+                <h2 id="demo-login-title">Choose a role</h2>
+              </div>
+              <span className="demo-login__badge">Read only</span>
+            </div>
+            <div className="demo-login__grid">
+              {demoConfig.accounts.map((account) => (
+                <button
+                  className={`demo-account${selectedDemoAccount?.phone === account.phone ? ' is-selected' : ''}`}
+                  type="button"
+                  key={account.phone}
+                  onClick={() => selectDemoAccount(account)}
+                  aria-pressed={selectedDemoAccount?.phone === account.phone}
+                >
+                  <span className="demo-account__role">{account.name}</span>
+                  <span className="demo-account__description">{account.description}</span>
+                  <span className="demo-account__phone">{account.phone}</span>
+                </button>
+              ))}
+            </div>
+            <p className="demo-login__hint">Select a role to fill its demo mobile number.</p>
+          </section>
+        ) : null}
         <div className="auth-stepper" aria-label="Login progress">
           <div className={`auth-stepper__item${step === 'phone' ? ' is-active' : ' is-complete'}`}>
             <span className="auth-stepper__index">1</span>
@@ -210,7 +280,16 @@ export default function LoginPage() {
 
           {step === 'otp' ? (
             <div className="auth-inline-note">
-              OTP sent to +91 {phone}. Make sure the latest code is used.
+              <span>OTP sent to +91 {phone}. Make sure the latest code is used.</span>
+              {selectedDemoAccount && demoConfig?.otpCode ? (
+                <button
+                  className="demo-otp-button"
+                  type="button"
+                  onClick={() => setOtp(demoConfig.otpCode ?? '')}
+                >
+                  Use demo OTP <strong>{demoConfig.otpCode}</strong>
+                </button>
+              ) : null}
             </div>
           ) : null}
 

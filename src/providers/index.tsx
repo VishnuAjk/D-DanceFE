@@ -19,7 +19,10 @@ export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>{children}</AuthProvider>
-      {process.env.NODE_ENV === 'development' ? <ReactQueryDevtools /> : null}
+      {process.env.NODE_ENV === 'development' &&
+      process.env.NEXT_PUBLIC_ENABLE_QUERY_DEVTOOLS !== 'false' ? (
+        <ReactQueryDevtools />
+      ) : null}
     </QueryClientProvider>
   );
 }

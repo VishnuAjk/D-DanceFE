@@ -3,6 +3,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
 import { EntityModal } from '@/components/admin/entity-modal';
+import { DemoMutationButton } from '@/components/demo-mutation-button';
 import { useBranches } from '@/hooks/use-branches';
 import { useCourses } from '@/hooks/use-courses';
 import { useAdminVideos } from '@/hooks/use-videos';
@@ -178,13 +179,13 @@ export default function AdminVideosPage() {
                 <button className="button button--ghost" onClick={() => openEdit(video)} type="button">
                   Edit
                 </button>
-                <button
+                <DemoMutationButton
                   className="button button--ghost"
                   onClick={() => void deleteMutation.mutateAsync(video._id)}
                   type="button"
                 >
                   Delete
-                </button>
+                </DemoMutationButton>
               </div>
             </article>
           ))
@@ -305,9 +306,9 @@ export default function AdminVideosPage() {
               </select>
             </label>
             {error ? <div className="auth-feedback auth-feedback--error">{error}</div> : null}
-            <button className="button button--primary" disabled={saveMutation.isPending} type="submit">
+            <DemoMutationButton className="button button--primary" disabled={saveMutation.isPending} type="submit">
               {saveMutation.isPending ? 'Saving...' : 'Save video'}
-            </button>
+            </DemoMutationButton>
           </form>
         </EntityModal>
       ) : null}

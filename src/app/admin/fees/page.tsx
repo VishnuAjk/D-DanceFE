@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { EntityModal } from '@/components/admin/entity-modal';
+import { DemoMutationButton } from '@/components/demo-mutation-button';
 import { useBranches } from '@/hooks/use-branches';
 import { useFeeLedger } from '@/hooks/use-fee-ledger';
 import { discountFeeLedger, waiveFeeLedger } from '@/lib/admin-api';
@@ -166,14 +167,14 @@ export default function AdminFeesPage() {
                   >
                     Discount
                   </button>
-                  <button
+                  <DemoMutationButton
                     className="button button--ghost"
                     type="button"
                     onClick={() => void actionMutation.mutateAsync({ ledgerId: entry._id, action: 'waive' })}
                     disabled={entry.status === 'PAID' || entry.status === 'WAIVED'}
                   >
                     Waive
-                  </button>
+                  </DemoMutationButton>
                 </div>
               </article>
             );
@@ -205,7 +206,7 @@ export default function AdminFeesPage() {
                 onChange={(event) => setDiscountValue(event.target.value.replace(/[^\d.]/g, ''))}
               />
             </label>
-            <button
+            <DemoMutationButton
               className="button button--primary"
               type="button"
               disabled={!discountValue || actionMutation.isPending}
@@ -218,7 +219,7 @@ export default function AdminFeesPage() {
               }
             >
               {actionMutation.isPending ? 'Applying...' : 'Apply discount'}
-            </button>
+            </DemoMutationButton>
           </div>
         </EntityModal>
       ) : null}

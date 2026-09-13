@@ -523,6 +523,126 @@ select {
   gap: 0.75rem;
 }
 
+.demo-login {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: 1.25rem;
+  padding: 1rem;
+  border: 1px solid rgba(181, 83, 47, 0.2);
+  border-radius: 1.15rem;
+  background: rgba(239, 207, 176, 0.22);
+}
+
+.demo-login__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.demo-login__header .auth-card__eyebrow {
+  margin-bottom: 0.3rem;
+}
+
+.demo-login__header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.demo-login__badge {
+  flex: none;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(33, 23, 15, 0.08);
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.demo-login__grid {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.demo-account {
+  display: grid;
+  gap: 0.25rem;
+  width: 100%;
+  padding: 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 0.9rem;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+}
+
+.demo-account:hover,
+.demo-account:focus-visible,
+.demo-account.is-selected {
+  border-color: var(--accent);
+  box-shadow: inset 4px 0 0 var(--accent);
+}
+
+.demo-account__role,
+.demo-account__phone {
+  font-weight: 800;
+}
+
+.demo-account__description,
+.demo-login__hint {
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.4;
+}
+
+.demo-login__hint {
+  margin: 0;
+}
+
+.demo-account__phone {
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.auth-inline-note {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.demo-otp-button {
+  justify-self: start;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid rgba(181, 83, 47, 0.25);
+  border-radius: 0.7rem;
+  background: rgba(255, 255, 255, 0.7);
+  color: var(--accent);
+  font: inherit;
+  cursor: pointer;
+}
+
+.demo-read-only-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid rgba(181, 83, 47, 0.22);
+  border-radius: 0.9rem;
+  background: #fff4df;
+  color: #6f3a20;
+  font-size: 0.9rem;
+}
+
+@media (min-width: 640px) {
+  .demo-login__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 .field {
   display: grid;
   gap: 0.45rem;

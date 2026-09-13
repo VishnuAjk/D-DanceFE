@@ -13,7 +13,11 @@ export default defineConfig({
     trace: 'on-first-retry'
   },
   webServer: {
-    command: `NEXT_PUBLIC_API_URL=http://127.0.0.1:4010 pnpm dev --hostname 127.0.0.1 --port ${port}`,
+    command: `node node_modules/next/dist/bin/next dev --hostname 127.0.0.1 --port ${port}`,
+    env: {
+      NEXT_PUBLIC_API_URL: 'http://127.0.0.1:4010',
+      NEXT_PUBLIC_ENABLE_QUERY_DEVTOOLS: 'false'
+    },
     url: `http://127.0.0.1:${port}`,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000
