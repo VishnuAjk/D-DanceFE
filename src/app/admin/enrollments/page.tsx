@@ -2,6 +2,7 @@
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
+import { DemoMutationButton } from '@/components/demo-mutation-button';
 import { useAdminEnrollments } from '@/hooks/use-admin-enrollments';
 import { approveEnrollment, rejectEnrollment, suspendEnrollment } from '@/lib/admin-api';
 import { formatCurrency, formatSchedule, readReferenceLabel } from '@/lib/admin-format';
@@ -49,32 +50,32 @@ export default function AdminEnrollmentsPage() {
       case 'PENDING':
         return (
           <>
-            <button
+            <DemoMutationButton
               className="button button--primary"
               type="button"
               onClick={() => void actionMutation.mutateAsync({ enrollmentId: enrollment._id, action: 'approve' })}
             >
               Approve
-            </button>
-            <button
+            </DemoMutationButton>
+            <DemoMutationButton
               className="button button--ghost"
               type="button"
               onClick={() => void actionMutation.mutateAsync({ enrollmentId: enrollment._id, action: 'reject' })}
             >
               Reject
-            </button>
+            </DemoMutationButton>
           </>
         );
       case 'APPROVED':
       case 'ACTIVE':
         return (
-          <button
+          <DemoMutationButton
             className="button button--ghost"
             type="button"
             onClick={() => void actionMutation.mutateAsync({ enrollmentId: enrollment._id, action: 'suspend' })}
           >
             Suspend
-          </button>
+          </DemoMutationButton>
         );
       default:
         return null;

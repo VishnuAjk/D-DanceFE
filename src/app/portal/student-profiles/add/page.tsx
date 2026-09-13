@@ -3,6 +3,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { DemoMutationButton } from '@/components/demo-mutation-button';
 import { createStudentProfile } from '@/lib/portal-api';
 import { formatApiError } from '@/lib/api-errors';
 import { useAuth } from '@/providers/auth-provider';
@@ -131,9 +132,9 @@ export default function AddStudentPage() {
             />
           </label>
           {error ? <div className="auth-feedback auth-feedback--error">{error}</div> : null}
-          <button className="button button--primary" disabled={mutation.isPending} type="submit">
+          <DemoMutationButton className="button button--primary" disabled={mutation.isPending} type="submit">
             {mutation.isPending ? 'Saving...' : 'Create student profile'}
-          </button>
+          </DemoMutationButton>
         </form>
       </section>
     </main>

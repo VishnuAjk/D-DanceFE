@@ -3,6 +3,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { EntityModal } from '@/components/admin/entity-modal';
+import { DemoMutationButton } from '@/components/demo-mutation-button';
 import { useBranches } from '@/hooks/use-branches';
 import { createBranch, updateBranch } from '@/lib/admin-api';
 import { formatApiError, isForbiddenError } from '@/lib/api-errors';
@@ -157,9 +158,9 @@ export default function BranchesPage() {
               />
             </label>
             {error ? <div className="auth-feedback auth-feedback--error">{error}</div> : null}
-            <button className="button button--primary" disabled={saveMutation.isPending} type="submit">
+            <DemoMutationButton className="button button--primary" disabled={saveMutation.isPending} type="submit">
               {saveMutation.isPending ? 'Saving...' : 'Save branch'}
-            </button>
+            </DemoMutationButton>
           </form>
         </EntityModal>
       ) : null}

@@ -56,5 +56,5 @@ test('customer can add a student and submit a pending enrollment request', async
 
   await page.goto('/portal/enrollments');
   await expect(page.getByText('Anaya Rao')).toBeVisible();
-  await expect(page.getByText('PENDING')).toBeVisible();
+  await expect(page.getByText('PENDING', { exact: true })).toBeVisible();
 });

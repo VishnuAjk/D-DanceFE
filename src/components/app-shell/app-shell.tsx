@@ -86,7 +86,15 @@ export function AppShell({ children, navigation, roles }: AppShellProps) {
           <button className="button button--ghost" onClick={() => void logout()} type="button">Logout</button>
         </aside>
 
-        <div className="app-content">{children}</div>
+        <div className="app-content">
+          {user?.isDemo ? (
+            <div className="demo-read-only-banner" role="status">
+              <strong>Read-only demo</strong>
+              <span>You can explore this role, but changes and payments are disabled.</span>
+            </div>
+          ) : null}
+          {children}
+        </div>
 
         <nav className="mobile-bottom-nav" aria-label={`${navigation.sectionLabel} primary navigation`}>
           {navigation.primary.map((item) => <NavLink key={item.href} {...item} active={isNavigationActive(pathname, item)} />)}

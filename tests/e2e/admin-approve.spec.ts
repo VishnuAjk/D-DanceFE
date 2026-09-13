@@ -24,9 +24,9 @@ test('admin can approve a pending enrollment request', async ({ page }) => {
   });
 
   await page.goto('/admin/enrollments');
-  await expect(page.getByText('PENDING')).toBeVisible();
+  await expect(page.getByText('PENDING', { exact: true })).toBeVisible();
   await page.getByRole('button', { name: 'Approve' }).click();
   await page.getByLabel('Status filter').selectOption('APPROVED');
 
-  await expect(page.getByText('APPROVED')).toBeVisible();
+  await expect(page.getByText('APPROVED', { exact: true })).toBeVisible();
 });

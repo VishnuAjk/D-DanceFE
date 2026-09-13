@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
+import { DemoMutationButton } from '@/components/demo-mutation-button';
 import { useStudentProfiles } from '@/hooks/use-student-profiles';
 import { useEnrollmentBatches, useEnrollmentBranches } from '@/hooks/use-enrollments';
 import { readReferenceId, readReferenceLabel, formatCurrency, formatSchedule } from '@/lib/admin-format';
@@ -216,14 +217,14 @@ export default function NewEnrollmentPage() {
             <button className="button button--ghost" onClick={() => setStep(2)} type="button">
               Back
             </button>
-            <button
+            <DemoMutationButton
               className="button button--primary"
               disabled={!studentProfileId || !batchId || mutation.isPending}
               onClick={() => void mutation.mutateAsync()}
               type="button"
             >
               {mutation.isPending ? 'Submitting...' : 'Submit enrollment request'}
-            </button>
+            </DemoMutationButton>
           </div>
         </section>
       ) : null}

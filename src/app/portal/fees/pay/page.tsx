@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useMutation } from '@tanstack/react-query';
 import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { DemoMutationButton } from '@/components/demo-mutation-button';
 import { usePortalFees } from '@/hooks/use-portal-fees';
 import { formatCurrency, formatSchedule, readReferenceLabel } from '@/lib/admin-format';
 import { formatApiError } from '@/lib/api-errors';
@@ -242,14 +243,14 @@ export default function CustomerFeePaymentPage() {
           <Link className="button button--ghost" href="/portal/fees">
             Cancel
           </Link>
-          <button
+          <DemoMutationButton
             className="button button--primary"
             disabled={!selectedIds.length || mutation.isPending}
             onClick={() => void mutation.mutateAsync()}
             type="button"
           >
             {mutation.isPending ? 'Opening checkout...' : `Pay ${formatCurrency(total)}`}
-          </button>
+          </DemoMutationButton>
         </div>
       </section>
     </main>

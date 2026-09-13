@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { DemoMutationButton } from '@/components/demo-mutation-button';
 import { useStudentProfile } from '@/hooks/use-student-profiles';
 import { formatApiError } from '@/lib/api-errors';
 import { deleteStudentProfile, updateStudentProfile } from '@/lib/portal-api';
@@ -125,17 +126,17 @@ export default function StudentDetailPage() {
             </label>
             {error ? <div className="auth-feedback auth-feedback--error">{error}</div> : null}
             <div className="admin-panel__actions">
-              <button className="button button--primary" disabled={updateMutation.isPending} type="submit">
+              <DemoMutationButton className="button button--primary" disabled={updateMutation.isPending} type="submit">
                 {updateMutation.isPending ? 'Saving...' : 'Save changes'}
-              </button>
-              <button
+              </DemoMutationButton>
+              <DemoMutationButton
                 className="button button--ghost"
                 disabled={deleteMutation.isPending}
                 onClick={() => void deleteMutation.mutateAsync()}
                 type="button"
               >
                 {deleteMutation.isPending ? 'Removing...' : 'Remove student'}
-              </button>
+              </DemoMutationButton>
             </div>
           </form>
         ) : (

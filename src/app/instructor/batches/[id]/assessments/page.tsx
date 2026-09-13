@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { useMutation, useQuery } from '@tanstack/react-query';
+import { DemoMutationButton } from '@/components/demo-mutation-button';
 import { useInstructorBatchRoster } from '@/hooks/use-instructor-batches';
 import { calculateAge } from '@/lib/student-format';
 import { createAssessment, fetchInstructorAssessments, shareAssessment } from '@/lib/instructor-api';
@@ -192,14 +193,14 @@ export default function InstructorAssessmentsPage() {
           </div>
         ) : null}
 
-        <button
+        <DemoMutationButton
           className="button button--primary sticky-primary-action"
           type="button"
           disabled={!selected || createMutation.isPending}
           onClick={() => void createMutation.mutateAsync()}
         >
           {createMutation.isPending ? 'Saving assessment...' : 'Save assessment'}
-        </button>
+        </DemoMutationButton>
       </section>
 
       <section className="family-grid">
@@ -222,14 +223,14 @@ export default function InstructorAssessmentsPage() {
                       {record.assessedAt.slice(0, 10)} • {batchRef?.name ?? 'Batch'}
                     </p>
                   </div>
-                  <button
+                  <DemoMutationButton
                     type="button"
                     className="button button--ghost"
                     disabled={shareDisabled}
                     onClick={() => void shareMutation.mutateAsync(record._id)}
                   >
                     {record.sharedWithCustomer ? 'Shared' : shareMutation.isPending ? 'Sharing...' : 'Share'}
-                  </button>
+                  </DemoMutationButton>
                 </div>
 
                 {student ? (
