@@ -25,15 +25,24 @@ This frontend must be built mobile-first throughout the project.
 - Add larger-screen layout enhancements afterward
 - Do not treat desktop tables, spacing, or nav patterns as the baseline UX
 
-## Next steps
+## Local development
 
 1. Install dependencies with `pnpm install`
 2. Copy `.env.example` to `.env.local`
 3. Run `pnpm dev`
-4. Continue with Sprint 2 frontend auth work
+4. Run `pnpm typecheck`, `pnpm lint`, `pnpm test`, `pnpm build`, and `pnpm test:e2e` before opening a pull request
+
+## CI and deployment
+
+Pull requests to `env/dev` and `main`, plus direct pushes to those branches,
+run typechecking, linting, unit tests, a production build, and the Playwright
+browser suite. The production frontend is connected to `env/dev` through
+Vercel's Git integration, so merging to `env/dev` triggers the deployment.
+Deployment credentials are not stored in GitHub Actions and there is no
+separate repository deployment workflow.
 
 ## Workspace docs
 
 Use the workspace agent entry document for project-wide workflow:
 
-- [ENTRYPOINT.md](/home/vishnu/Projects/Dance%20Web%20App/docs/agent-dev/ENTRYPOINT.md)
+- `../docs/agent-dev/ENTRYPOINT.md` in the local workspace

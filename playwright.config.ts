@@ -1,25 +1,32 @@
 import { defineConfig, devices } from '@playwright/test';
 
 const port = Number(process.env.PLAYWRIGHT_PORT ?? 3100);
+const isCi = Boolean(process.env.CI);
 
 export default defineConfig({
   testDir: './tests/e2e',
-  fullyParallel: true,
-  forbidOnly: Boolean(process.env.CI),
-  retries: process.env.CI ? 2 : 0,
-  reporter: process.env.CI ? 'github' : 'list',
+  fullyParallel: false,
+  forbidOnly: isCi,
+  retries: isCi ? 2 : 0,
+  workers: 2,
+  reporter: isCi
+    ? [
+        ['github'],
+        ['html', { open: 'never' }]
+      ]
+    : 'list',
   use: {
     baseURL: `http://127.0.0.1:${port}`,
     trace: 'on-first-retry'
   },
   webServer: {
-    command: `node node_modules/next/dist/bin/next dev --hostname 127.0.0.1 --port ${port}`,
+    command: `node node_modules/next/dist/bin/next ${isCi ? 'start' : 'dev'} --hostname 127.0.0.1 --port ${port}`,
     env: {
       NEXT_PUBLIC_API_URL: 'http://127.0.0.1:4010',
       NEXT_PUBLIC_ENABLE_QUERY_DEVTOOLS: 'false'
     },
     url: `http://127.0.0.1:${port}`,
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: !isCi,
     timeout: 120_000
   },
   projects: [
