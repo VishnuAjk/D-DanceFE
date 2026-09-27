@@ -1,10 +1,11 @@
 import { redirect } from 'next/navigation';
 
-export default function LegacyParentRedirect({
+export default async function LegacyParentRedirect({
   params
 }: {
-  params: { path?: string[] };
+  params: Promise<{ path?: string[] }>;
 }) {
-  const suffix = params.path?.length ? `/${params.path.join('/')}` : '';
+  const { path } = await params;
+  const suffix = path?.length ? `/${path.join('/')}` : '';
   redirect(`/portal${suffix}`);
 }

@@ -2,6 +2,7 @@
   "name": "d-dancefe",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@10.34.5",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -18,10 +19,9 @@
     "@danceapp/shared": "https://codeload.github.com/VishnuAjk/D-DanceShared/tar.gz/6f57401e7da9c75025f2c0987e2527897b1e7c04",
     "@tanstack/react-query": "^5.51.1",
     "@tanstack/react-query-devtools": "^5.51.1",
-    "axios": "^1.7.3",
+    "axios": "^1.20.0",
     "jose": "^5.6.3",
-    "next": "^14.2.5",
-    "next-intl": "^3.17.4",
+    "next": "^15.5.26",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "zod": "^3.23.8"
@@ -37,7 +37,7 @@
     "autoprefixer": "^10.4.20",
     "eslint": "^9.30.1",
     "globals": "^15.9.0",
-    "postcss": "^8.4.40",
+    "postcss": "^8.5.28",
     "tailwindcss": "^3.4.7",
     "typescript": "^5.5.4",
     "vitest": "^2.0.5"
